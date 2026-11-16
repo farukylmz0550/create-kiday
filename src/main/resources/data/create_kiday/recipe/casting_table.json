@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "PBP",
+    "AAA"
+  ],
+  "key": {
+    "S": {
+      "item": "create:iron_sheet"
+    },
+    "P": {
+      "item": "create:fluid_pipe"
+    },
+    "B": {
+      "item": "create:basin"
+    },
+    "A": {
+      "item": "create:andesite_alloy"
+    }
+  },
+  "result": {
+    "id": "create_kiday:casting_table",
+    "count": 1
+  }
+}

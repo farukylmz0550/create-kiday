@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "T",
+    "T"
+  ],
+  "key": {
+    "T": {
+      "item": "create_kiday:kiday_trapdoor"
+    }
+  },
+  "result": {
+    "id": "create_kiday:kiday_door",
+    "count": 1
+  }
+}

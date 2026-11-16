@@ -1,0 +1,9 @@
+{
+  "type": "create_kiday:casting",
+  "mold": "create_kiday:ingot_mold",
+  "fluid": "create_kiday:molten_kiday",
+  "amount": 144,
+  "result": "create_kiday:hot_kiday_ingot",
+  "metal_units": 1,
+  "processing_time": 20
+}

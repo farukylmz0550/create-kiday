@@ -1,0 +1,26 @@
+ {
+   "parent": "create_kiday:root",
+   "display": {
+     "icon": {
+       "id": "create_kiday:storm_amulet"
+     },
+     "title": {
+       "translate": "advancements.create_kiday.defeat_lei_gong.title"
+     },
+     "description": {
+       "translate": "advancements.create_kiday.defeat_lei_gong.description"
+     },
+     "frame": "challenge",
+     "announce_to_chat": true
+   },
+   "criteria": {
+     "kill": {
+       "trigger": "minecraft:player_killed_entity",
+       "conditions": {
+         "entity": {
+           "type": "create_kiday:lei_gong"
+         }
+       }
+     }
+   }
+ }

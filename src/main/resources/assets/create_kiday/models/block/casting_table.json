@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "bottom": "create_kiday:block/casting_table_bottom",
+    "top": "create_kiday:block/casting_table_top",
+    "front": "create_kiday:block/casting_table_front",
+    "back": "create_kiday:block/casting_table_back",
+    "right": "create_kiday:block/casting_table_right",
+    "left": "create_kiday:block/casting_table_left",
+    "down": "#bottom",
+    "up": "#top",
+    "north": "#front",
+    "south": "#back",
+    "west": "#right",
+    "east": "#left",
+    "particle": "#front"
+  }
+}

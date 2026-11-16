@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "create_kiday:kiday_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_kiday:kiday_sheet"
+    }
+  ]
+}

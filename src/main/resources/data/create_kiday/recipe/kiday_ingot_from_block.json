@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create_kiday:kiday_block"
+    }
+  ],
+  "result": {
+    "id": "create_kiday:kiday_ingot",
+    "count": 9
+  }
+}

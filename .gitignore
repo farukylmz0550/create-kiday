@@ -1,0 +1,90 @@
+# Build output and caches
+.gradle/
+build/
+out/
+target/
+bin/
+*.class
+*.jar
+
+# Local Minecraft/NeoForge runtime state
+run/
+run-*/
+logs/
+crash-reports/
+saves/
+screenshots/
+config/
+defaultconfigs/
+mods/
+resourcepacks/
+shaderpacks/
+options.txt
+optionsof.txt
+servers.dat
+usercache.json
+usernamecache.json
+*.log
+
+# Local environment, credentials, and signing material
+.env
+.env.*
+!.env.example
+!.env.template
+.direnv/
+.envrc
+local.properties
+gradle-local.properties
+gradle.properties.local
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.pem
+*.key
+
+# Personal coding-agent state
+.codex/
+.agents/
+.claude/
+.cursor/
+.continue/
+.gemini/
+.windsurf/
+.aider*
+AGENTS.local.md
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# IDE and editor-local state
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+.fleet/
+.zed/
+*.code-workspace
+*.swp
+*.swo
+*~
+
+# OS metadata and temporary files
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+.Trash-*
+.cache/
+tmp/
+temp/
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# Generated data cache only; generated source data remains trackable
+src/generated/resources/.cache/

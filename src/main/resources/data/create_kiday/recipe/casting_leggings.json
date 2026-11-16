@@ -1,0 +1,9 @@
+{
+  "type": "create_kiday:casting",
+  "mold": "create_kiday:leggings_mold",
+  "fluid": "create_kiday:molten_kiday",
+  "amount": 1008,
+  "result": "create_kiday:hot_kiday_leggings",
+  "metal_units": 7,
+  "processing_time": 140
+}

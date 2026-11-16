@@ -1,0 +1,13 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "create_kiday:hot_kiday_trapdoor"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_kiday:kiday_trapdoor"
+    }
+  ]
+}

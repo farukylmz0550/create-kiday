@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "create_kiday:kiday_ore",
+    "create_kiday:deepslate_kiday_ore"
+  ]
+}

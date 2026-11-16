@@ -1,0 +1,114 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.148'
+    id 'idea'
+}
+
+version = mod_version
+group = mod_group_id
+
+base { archivesName = mod_id }
+
+tasks.named('jar', Jar).configure {
+    archiveFileName = "${mod_id}_${version}.jar"
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+}
+
+sourceSets.main.resources {
+    srcDir('src/generated/resources')
+    exclude('**/*.bbmodel', '**/.cache/**')
+}
+
+repositories {
+    maven { url = 'https://maven.createmod.net' }
+    maven { url = 'https://maven.ithundxr.dev/snapshots' }
+    maven { url = 'https://maven.theillusivec4.top/' }
+    maven { url = 'https://maven.blamejared.com' }
+    maven { url = 'https://raw.githubusercontent.com/Fuzss/modresources/main/maven' }
+}
+
+neoForge {
+    version = project.neo_version
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+    runs {
+        client {
+            client()
+            if (project.hasProperty('kidayClientSmokeTest')) {
+                systemProperty 'create_kiday.clientSmokeTest', 'true'
+            }
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        gameTestServer {
+            type = 'gameTestServer'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').absolutePath, '--existing', file('src/main/resources/').absolutePath
+        }
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.INFO
+        }
+    }
+    mods {
+        "${mod_id}" { sourceSet(sourceSets.main) }
+    }
+}
+
+configurations { runtimeClasspath.extendsFrom localRuntime }
+
+dependencies {
+    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}") {
+        // The published POM exposes Create's development-only compatibility mods as
+        // runtime dependencies. The release jar already carries its required libraries.
+        transitive = false
+    }
+    implementation("com.tterrag.registrate:Registrate:MC1.21-1.3.0+67")
+    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}")
+    compileOnly("net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1")
+    compileOnly("top.theillusivec4.curios:curios-neoforge:${curios_version}:api")
+    localRuntime("top.theillusivec4.curios:curios-neoforge:${curios_version}")
+    compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
+    localRuntime("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+tasks.named('test', Test).configure { useJUnitPlatform() }
+
+def fragmanModsDirectory = file('/home/farukylmz/.var/app/com.modrinth.ModrinthApp/data/ModrinthApp/profiles/fragman/mods')
+def installFragmanMod = tasks.register('installFragmanMod', Copy) {
+    group = 'distribution'
+    description = 'Copies the compiled mod JAR into the Modrinth fragman profile.'
+    dependsOn tasks.named('jar')
+    mustRunAfter tasks.named('check'), tasks.named('assemble')
+    from(tasks.named('jar').flatMap { it.archiveFile })
+    into fragmanModsDirectory
+}
+tasks.named('build') { dependsOn installFragmanMod }
+
+var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
+    var replaceProperties = [minecraft_version_range: minecraft_version_range, neo_version: neo_version, loader_version_range: loader_version_range, mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version]
+    inputs.properties replaceProperties
+    expand replaceProperties
+    from 'src/main/templates'
+    into 'build/generated/sources/modMetadata'
+}
+sourceSets.main.resources.srcDir generateModMetadata
+neoForge.ideSyncTask generateModMetadata

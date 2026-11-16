@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IGI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "create:iron_sheet"
+    },
+    "G": {
+      "item": "create:golden_sheet"
+    }
+  },
+  "result": {
+    "id": "create_kiday:blank_mold",
+    "count": 1
+  }
+}

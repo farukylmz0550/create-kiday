@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "H",
+    "S",
+    "S"
+  ],
+  "key": {
+    "H": {
+      "item": "create_kiday:kiday_axe_head"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "create_kiday:kiday_axe",
+    "count": 1
+  }
+}
