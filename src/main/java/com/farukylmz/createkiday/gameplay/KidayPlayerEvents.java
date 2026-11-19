@@ -9,6 +9,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import com.farukylmz.createkiday.item.HotKidayItem;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -39,6 +40,10 @@ public final class KidayPlayerEvents {
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         var player = event.getEntity();
         if (player.level().isClientSide()) return;
+        if (player.tickCount % 20 == 0 && (player.getMainHandItem().getItem() instanceof HotKidayItem
+                || player.getOffhandItem().getItem() instanceof HotKidayItem)) {
+            player.hurt(player.damageSources().hotFloor(), 1.0F);
+        }
         if (player.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.KIDAY_HELMET.get())) {
             player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 260, 0, false, false, false));
         }
