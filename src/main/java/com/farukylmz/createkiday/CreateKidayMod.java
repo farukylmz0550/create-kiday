@@ -75,7 +75,8 @@ public final class CreateKidayMod {
         event.register(ModEntities.LEI_GONG.get(), SpawnPlacementTypes.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 (type, level, spawnType, pos, random) -> level.getBiome(pos).is(ModBiomes.STORM_GROVE)
-                        && LeiGongEntity.checkMonsterSpawnRules(type, level, spawnType, pos, random),
+                        && net.minecraft.world.entity.monster.Monster.checkAnyLightMonsterSpawnRules(
+                                type, level, spawnType, pos, random),
                 RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 
