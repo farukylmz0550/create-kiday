@@ -238,7 +238,7 @@ class ResourceDistinctnessTest {
         assertNotNull(getClass().getClassLoader().getResource("assets/create_kiday/models/item/storm_amulet.json"));
         String stormGrove = text("data/create_kiday/worldgen/biome/storm_grove.json");
         assertTrue(stormGrove.contains("\"type\": \"create_kiday:lei_gong\",\n        \"weight\": 400"));
-        assertTrue(text("data/create_kiday/worldgen/biome/storm_grove.json").contains("create_kiday:cherry_trees_sparse"));
+        assertTrue(text("data/create_kiday/worldgen/biome/storm_grove.json").contains("create_kiday:cherry_trees_medium"));
         assertNotNull(getClass().getClassLoader().getResource("assets/create_kiday/models/item/lei_gong_spawn_egg.json"));
         assertTrue(text("assets/create_kiday/lang/en_us.json").contains("Lei Gong Spawn Egg"));
         assertTrue(text("assets/create_kiday/lang/tr_tr.json").contains("Lei Gong Çağırma Yumurtası"));

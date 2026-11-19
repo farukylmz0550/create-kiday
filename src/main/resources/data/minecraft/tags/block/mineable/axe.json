@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "create_kiday:vakvak_log",
+    "create_kiday:vakvak_wood",
+    "create_kiday:stripped_vakvak_log",
+    "create_kiday:stripped_vakvak_wood",
+    "create_kiday:vakvak_planks",
+    "create_kiday:vakvak_stairs",
+    "create_kiday:vakvak_slab",
+    "create_kiday:vakvak_fence",
+    "create_kiday:vakvak_fence_gate",
+    "create_kiday:vakvak_door",
+    "create_kiday:vakvak_trapdoor",
+    "create_kiday:vakvak_button",
+    "create_kiday:vakvak_pressure_plate"
+  ]
+}

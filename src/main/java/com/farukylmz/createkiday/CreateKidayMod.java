@@ -7,6 +7,8 @@ import com.farukylmz.createkiday.registry.ModEquipment;
 import com.farukylmz.createkiday.registry.ModEntities;
 import com.farukylmz.createkiday.registry.ModRecipes;
 import com.farukylmz.createkiday.registry.ModMobEffects;
+import com.farukylmz.createkiday.registry.ModSounds;
+import com.farukylmz.createkiday.registry.ModFeatures;
 import com.farukylmz.createkiday.registry.ModCreativeTabs;
 import com.farukylmz.createkiday.network.LaunchDiskPayload;
 import com.farukylmz.createkiday.network.OpenChroniclePayload;
@@ -46,6 +48,8 @@ public final class CreateKidayMod {
         ModEntities.register(modBus);
         ModRecipes.register(modBus);
         ModMobEffects.register(modBus);
+        ModSounds.register(modBus);
+        ModFeatures.register(modBus);
         ModCreativeTabs.register(modBus);
         modBus.addListener(this::registerPayloads);
         modBus.addListener(this::addCreativeItems);
@@ -57,6 +61,7 @@ public final class CreateKidayMod {
         NeoForge.EVENT_BUS.addListener(this::bindStormGroveBiome);
         NeoForge.EVENT_BUS.addListener(this::clearStormGroveBiome);
     }
+
 
     private void bindStormGroveBiome(ServerAboutToStartEvent event) {
         StormGroveBiomeResolver.bind(event.getServer());
@@ -109,10 +114,26 @@ public final class CreateKidayMod {
             event.accept(ModBlocks.KIDAY_TRAPDOOR_ITEM);
             event.accept(ModBlocks.CASTING_TABLE_ITEM);
             event.accept(ModBlocks.LIGHTNING_ENGINE_ITEM);
+            event.accept(ModBlocks.VAKVAK_LOG_ITEM);
+            event.accept(ModBlocks.VAKVAK_WOOD_ITEM);
+            event.accept(ModBlocks.STRIPPED_VAKVAK_LOG_ITEM);
+            event.accept(ModBlocks.STRIPPED_VAKVAK_WOOD_ITEM);
+            event.accept(ModBlocks.VAKVAK_PLANKS_ITEM);
+            event.accept(ModBlocks.VAKVAK_STAIRS_ITEM);
+            event.accept(ModBlocks.VAKVAK_SLAB_ITEM);
+            event.accept(ModBlocks.VAKVAK_FENCE_ITEM);
+            event.accept(ModBlocks.VAKVAK_FENCE_GATE_ITEM);
+            event.accept(ModBlocks.VAKVAK_DOOR_ITEM);
+            event.accept(ModBlocks.VAKVAK_TRAPDOOR_ITEM);
+            event.accept(ModBlocks.VAKVAK_BUTTON_ITEM);
+            event.accept(ModBlocks.VAKVAK_PRESSURE_PLATE_ITEM);
         }
         if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
             event.accept(ModBlocks.KIDAY_ORE_ITEM);
             event.accept(ModBlocks.DEEPSLATE_KIDAY_ORE_ITEM);
+            event.accept(ModBlocks.VAKVAK_LEAVES_ITEM);
+            event.accept(ModBlocks.VAKVAK_SAPLING_ITEM);
+            event.accept(ModBlocks.VAKVAK_FRUIT_ITEM);
         }
     }
 }

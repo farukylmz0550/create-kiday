@@ -1,21 +1,9 @@
 {
-  "feature": "minecraft:cherry_bees_005",
+  "feature": "create_kiday:vakvak_tree",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": {
-        "type": "minecraft:weighted_list",
-        "distribution": [
-          {
-            "data": 0,
-            "weight": 7
-          },
-          {
-            "data": 1,
-            "weight": 1
-          }
-        ]
-      }
+      "count": 1
     },
     {
       "type": "minecraft:in_square"
@@ -36,10 +24,7 @@
       "predicate": {
         "type": "minecraft:would_survive",
         "state": {
-          "Name": "minecraft:cherry_sapling",
-          "Properties": {
-            "stage": "0"
-          }
+          "Name": "create_kiday:vakvak_sapling"
         }
       }
     }

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_left",
+  "textures": {
+    "bottom": "create_kiday:block/vakvak_door_bottom",
+    "top": "create_kiday:block/vakvak_door_top"
+  }
+}

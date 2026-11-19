@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "create_kiday:block/vakvak_pressure_plate"
+    },
+    "powered=true": {
+      "model": "create_kiday:block/vakvak_pressure_plate_down"
+    }
+  }
+}

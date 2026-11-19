@@ -22,6 +22,22 @@ public final class ModCreativeTabs {
                 output.accept(ModBlocks.LIGHTNING_ENGINE_ITEM.get());
                 output.accept(ModBlocks.KIDAY_DOOR_ITEM.get());
                 output.accept(ModBlocks.KIDAY_TRAPDOOR_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_FRUIT_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_LOG_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_WOOD_ITEM.get());
+                output.accept(ModBlocks.STRIPPED_VAKVAK_LOG_ITEM.get());
+                output.accept(ModBlocks.STRIPPED_VAKVAK_WOOD_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_PLANKS_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_STAIRS_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_SLAB_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_FENCE_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_FENCE_GATE_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_PRESSURE_PLATE_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_BUTTON_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_LEAVES_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_SAPLING_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_DOOR_ITEM.get());
+                output.accept(ModBlocks.VAKVAK_TRAPDOOR_ITEM.get());
                 ModItems.visibleIngredients().forEach(item -> output.accept(item.get()));
                 ModItems.visibleEquipment().forEach(item -> output.accept(item.get() == ModItems.KIDAY_CHRONICLE.get()
                         ? ModItems.KIDAY_CHRONICLE.get().getDefaultInstance() : item.get().getDefaultInstance()));

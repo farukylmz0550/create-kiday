@@ -673,6 +673,10 @@ public final class KidayGameTests {
                 "lightning_engine", "kiday_chronicle", "hunter_bracelet",
                 "kiday_sword", "kiday_pickaxe", "kiday_axe", "kiday_shovel", "kiday_hoe",
                 "melting_raw_kiday", "pressing_kiday_sheet"));
+        required.addAll(List.of("vakvak_planks", "vakvak_planks_from_wood", "vakvak_planks_from_stripped_log",
+                "vakvak_planks_from_stripped_wood", "vakvak_sticks", "vakvak_stairs", "vakvak_slab",
+                "vakvak_fence", "vakvak_fence_gate", "vakvak_door", "vakvak_trapdoor",
+                "vakvak_pressure_plate", "vakvak_button", "vakvak_boat", "vakvak_chest_boat"));
         for (String mold : List.of("ingot", "sword_head", "pickaxe_head", "axe_head", "shovel_head", "hoe_head",
                 "helmet", "chestplate", "leggings", "boots", "trapdoor", "bracelet_frame")) {
             required.add("casting_" + mold);
@@ -686,6 +690,71 @@ public final class KidayGameTests {
             helper.assertTrue(helper.getLevel().getRecipeManager().byKey(
                             ResourceLocation.fromNamespaceAndPath("create_kiday", id)).isPresent(),
                     "Missing crafting or processing recipe: " + id);
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40)
+    public static void vakvakSaplingGrowsABranchedTreeWithBonemeal(GameTestHelper helper) {
+        BlockPos base = new BlockPos(8, 20, 8);
+        for (int x = -5; x <= 5; x++) {
+            for (int z = -5; z <= 5; z++) helper.setBlock(base.offset(x, 0, z), Blocks.DIRT);
+        }
+        helper.setBlock(base.above(), ModBlocks.VAKVAK_SAPLING.get().defaultBlockState()
+                .setValue(net.minecraft.world.level.block.SaplingBlock.STAGE, 1));
+        var sapling = ModBlocks.VAKVAK_SAPLING.get();
+        BlockPos worldBase = helper.absolutePos(base);
+        var state = helper.getLevel().getBlockState(worldBase.above());
+        helper.assertTrue(sapling.isValidBonemealTarget(helper.getLevel(), worldBase.above(), state),
+                "Vakvak sapling cannot receive bonemeal");
+        sapling.performBonemeal(helper.getLevel(), helper.getLevel().random, worldBase.above(), state);
+        int logs = 0;
+        int branchLogs = 0;
+        for (int x = -5; x <= 5; x++) {
+            for (int y = 1; y <= 16; y++) {
+                for (int z = -5; z <= 5; z++) {
+                    var grown = helper.getLevel().getBlockState(worldBase.offset(x, y, z));
+                    if (grown.is(ModBlocks.VAKVAK_LOG.get())) {
+                        logs++;
+                        if (grown.getValue(net.minecraft.world.level.block.RotatedPillarBlock.AXIS)
+                                != net.minecraft.core.Direction.Axis.Y) branchLogs++;
+                    }
+                }
+            }
+        }
+        helper.assertTrue(logs >= 8, "Bonemeal did not grow a full Vakvak tree: logs=" + logs);
+        helper.assertTrue(branchLogs >= 2, "Vakvak tree grew without visible branch logs: branches=" + branchLogs);
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40)
+    public static void vakvakFruitGrantsSixtySecondLightningProtectionOnly(GameTestHelper helper) {
+        ServerPlayer player = new DamageableFakePlayer(helper.getLevel(),
+                new GameProfile(UUID.randomUUID(), "vakvak-fruit-eater"));
+        helper.getLevel().addNewPlayer(player);
+        player.setGameMode(GameType.SURVIVAL);
+        player.getAbilities().invulnerable = false;
+        disableSpawnProtection(player);
+        player.setPos(helper.absoluteVec(new Vec3(4.5, 1.1, 4.5)));
+
+        ItemStack fruit = ModBlocks.VAKVAK_FRUIT_ITEM.get().getDefaultInstance();
+        var food = fruit.get(DataComponents.FOOD);
+        helper.assertTrue(food != null && food.nutrition() == 4 && food.canAlwaysEat(),
+                "Vakvak fruit must restore four hunger points and be edible when full");
+        fruit.finishUsingItem(helper.getLevel(), player);
+        var blessing = player.getEffect(ModMobEffects.VAKVAK_BLESSING);
+        helper.assertTrue(blessing != null && blessing.getDuration() == 1200,
+                "Eating Vakvak fruit did not apply its 1200 tick blessing");
+
+        float health = player.getHealth();
+        player.hurt(helper.getLevel().damageSources().lightningBolt(), 6.0F);
+        helper.assertTrue(player.getHealth() == health, "Vakvak's Blessing did not block vanilla lightning");
+        player.invulnerableTime = 0;
+        player.hurt(helper.getLevel().damageSources().source(ModDamageTypes.LEI_GONG_ELECTRICITY), 6.0F);
+        helper.assertTrue(player.getHealth() == health, "Vakvak's Blessing did not block Lei Gong's electricity");
+        player.invulnerableTime = 0;
+        player.hurt(helper.getLevel().damageSources().inFire(), 2.0F);
+        helper.assertTrue(player.getHealth() < health, "Vakvak's Blessing incorrectly blocked non-lightning damage");
+        helper.getLevel().removePlayerImmediately(player, Entity.RemovalReason.DISCARDED);
         helper.succeed();
     }
 

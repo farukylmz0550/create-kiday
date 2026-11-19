@@ -60,6 +60,8 @@ public final class KidayClient {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.HUNTER_DISK.get(), HunterDiskRenderer::new);
         event.registerEntityRenderer(ModEntities.LEI_GONG.get(), LeiGongRenderer::new);
+        event.registerEntityRenderer(ModEntities.VAKVAK_BOAT.get(), context -> new VakvakBoatRenderer(context, false));
+        event.registerEntityRenderer(ModEntities.VAKVAK_CHEST_BOAT.get(), context -> new VakvakBoatRenderer(context, true));
         event.registerBlockEntityRenderer(ModBlockEntities.CASTING_TABLE.get(), CastingTableRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.LIGHTNING_ENGINE.get(), LightningEngineRenderer::new);
     }

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "create_kiday:vakvak_log",
+    "create_kiday:vakvak_wood",
+    "create_kiday:stripped_vakvak_log",
+    "create_kiday:stripped_vakvak_wood"
+  ]
+}

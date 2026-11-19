@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create_kiday:vakvak_log"
+    }
+  ],
+  "result": {
+    "id": "create_kiday:vakvak_planks",
+    "count": 4
+  }
+}
