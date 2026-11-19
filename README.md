@@ -6,7 +6,7 @@
 
 Create: Kiday adds a new metal and its complete production chain to Create: find Kiday underground, melt it in a heated Basin, cast it with Patterns, and cool the castings with Bulk Washing. Explore new equipment, the Hunter Bracelet, the Lightning Engine, and the stormbound Lei Gong encounter.
 
-**Release:** [1.0.0](https://github.com/farukylmz0550/create-kiday/releases/tag/1.0.0) · **License:** MIT
+**Release:** [1.1.0](https://github.com/farukylmz0550/create-kiday/releases/tag/1.1.0) · **License:** MIT
 
 ## Screenshots
 
@@ -27,7 +27,7 @@ Create: Kiday adds a new metal and its complete production chain to Create: find
 - Curios 9.2.2 or later
 - JEI 19.x (optional)
 
-Install Create: Kiday and its required dependencies on both the client and server. Download the compiled `create_kiday_1.0.0.jar` from the [1.0.0 release](https://github.com/farukylmz0550/create-kiday/releases/tag/1.0.0).
+Install Create: Kiday and its required dependencies on both the client and server. Download the compiled `create_kiday_1.1.0.jar` from the [1.1.0 release](https://github.com/farukylmz0550/create-kiday/releases/tag/1.1.0).
 
 ## Getting started
 
@@ -47,6 +47,7 @@ The Casting Table recipe uses three Iron Sheets across the top row, two Create F
 - **Lightning Engine:** redirects lightning in its loaded chunk to its custom rod, then generates Create rotation for a limited charge. Set output from 1 to 64 RPM with the Create value box on its back; power exits through the horizontal shaft on the front.
 - **Storm Grove:** discover a stormbound biome and face Lei Gong's Avatar.
 - **Kiday Chronicle:** read the story behind the metal and its smith.
+- **Tag Filter:** filter items by dynamically loaded vanilla or modded item tags, with multiple tag selection, AND/OR matching, whitelist/blacklist modes, sample-item tag discovery, and matching previews.
 - **Create integration:** Ponder scenes and JEI recipe displays explain the production and machine workflows.
 
 ## Documentation and development

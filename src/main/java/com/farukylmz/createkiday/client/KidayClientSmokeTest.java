@@ -47,6 +47,8 @@ public final class KidayClientSmokeTest {
     private static boolean moltenBucketHandCapturePending;
     private static boolean moltenBucketInventoryCapturePending;
     private static boolean kidayOreHandCapturePending;
+    private static boolean tagFilterUiRequested;
+    private static boolean tagFilterUiChecked;
     private static int renderTicks;
     private static int stage;
     private static int bookWaitTicks;
@@ -77,6 +79,42 @@ public final class KidayClientSmokeTest {
             return;
         }
         if (minecraft.player == null) return;
+
+        if (!tagFilterUiChecked) {
+            if (!tagFilterUiRequested) {
+                var server = minecraft.getSingleplayerServer();
+                var playerId = minecraft.player.getUUID();
+                if (server == null) return;
+                server.execute(() -> {
+                    var serverPlayer = server.getPlayerList().getPlayer(playerId);
+                    if (serverPlayer == null) return;
+                    var tagFilter = ModItems.TAG_FILTER.get().getDefaultInstance();
+                    tagFilter.set(com.simibubi.create.AllDataComponents.FILTER_ITEMS,
+                            net.minecraft.world.item.component.ItemContainerContents.fromItems(
+                                    java.util.List.of(new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.OAK_PLANKS))));
+                    serverPlayer.setItemInHand(InteractionHand.MAIN_HAND, tagFilter);
+                    serverPlayer.getInventory().setItem(1, new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.OAK_PLANKS));
+                    ModItems.TAG_FILTER.get().use(serverPlayer.serverLevel(), serverPlayer, InteractionHand.MAIN_HAND);
+                });
+                tagFilterUiRequested = true;
+                bookWaitTicks = 0;
+                return;
+            }
+            if (minecraft.screen instanceof TagFilterScreen tagFilterScreen) {
+                if (!(tagFilterScreen.getMenu() instanceof com.farukylmz.createkiday.menu.TagFilterMenu menu)
+                        || menu.sample().isEmpty())
+                    throw new IllegalStateException("Tag Filter did not open its Create menu with a non-consuming example slot");
+                LogUtils.getLogger().info("KIDAY_TAG_FILTER_GUI_PASS dynamicTags={} sample={}",
+                        minecraft.level.registryAccess().lookupOrThrow(Registries.ITEM).listTagIds().count(),
+                        menu.sample());
+                tagFilterUiChecked = true;
+                verified = true;
+                minecraft.stop();
+                return;
+            }
+            if (++bookWaitTicks > 100) throw new IllegalStateException("Tag Filter did not open its Create-style editor");
+            return;
+        }
 
         try {
             if (stage == 0) {

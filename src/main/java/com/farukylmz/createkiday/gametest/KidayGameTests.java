@@ -10,7 +10,9 @@ import com.farukylmz.createkiday.entity.LeiGongEntity;
 import com.farukylmz.createkiday.bracelet.BraceletFlightService;
 import com.farukylmz.createkiday.gameplay.StormAmuletEvents;
 import com.farukylmz.createkiday.item.KidayChronicleItem;
+import com.farukylmz.createkiday.item.TagFilterData;
 import com.farukylmz.createkiday.registry.ModBiomes;
+import com.farukylmz.createkiday.registry.ModDataComponents;
 import com.farukylmz.createkiday.registry.ModDamageTypes;
 import com.farukylmz.createkiday.registry.ModMobEffects;
 import com.farukylmz.createkiday.registry.ModEntities;
@@ -21,6 +23,7 @@ import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
+import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import java.util.UUID;
 import java.util.List;
 import com.mojang.authlib.GameProfile;
@@ -41,6 +44,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.tags.FluidTags;
@@ -62,6 +67,36 @@ import net.neoforged.neoforge.common.util.FakePlayer;
 @GameTestHolder("create_kiday")
 public final class KidayGameTests {
     private KidayGameTests() {}
+
+    @GameTest(template = "empty", timeoutTicks = 20)
+    public static void tagFilterCombinesDynamicTagsAndIgnoresStackComponents(GameTestHelper helper) {
+        ItemStack filter = ModItems.TAG_FILTER.get().getDefaultInstance();
+        ItemStack planks = new ItemStack(Items.OAK_PLANKS);
+        planks.set(DataComponents.CUSTOM_NAME, Component.literal("Renamed planks"));
+
+        filter.set(ModDataComponents.TAG_FILTER_RULES.get(), new TagFilterData(
+                List.of("minecraft:planks", "minecraft:logs"), TagFilterData.MatchMode.ANY,
+                TagFilterData.FilterMode.WHITELIST));
+        helper.assertTrue(FilterItemStack.of(filter).test(helper.getLevel(), planks),
+                "OR whitelist failed to match a tagged item with custom components");
+
+        filter.set(ModDataComponents.TAG_FILTER_RULES.get(), new TagFilterData(
+                List.of("minecraft:logs", "minecraft:logs_that_burn"), TagFilterData.MatchMode.ALL,
+                TagFilterData.FilterMode.WHITELIST));
+        helper.assertTrue(FilterItemStack.of(filter).test(helper.getLevel(), new ItemStack(Items.OAK_LOG)),
+                "AND whitelist did not require and match all selected tags");
+        helper.assertFalse(FilterItemStack.of(filter).test(helper.getLevel(), planks),
+                "AND whitelist matched an item missing one or more selected tags");
+
+        filter.set(ModDataComponents.TAG_FILTER_RULES.get(), new TagFilterData(
+                List.of("minecraft:planks"), TagFilterData.MatchMode.ANY,
+                TagFilterData.FilterMode.BLACKLIST));
+        helper.assertFalse(FilterItemStack.of(filter).test(helper.getLevel(), planks),
+                "Blacklist accepted an item in its selected tag");
+        helper.assertTrue(FilterItemStack.of(filter).test(helper.getLevel(), new ItemStack(Items.STONE)),
+                "Blacklist rejected an item outside its selected tags");
+        helper.succeed();
+    }
 
     @GameTest(template = "empty", timeoutTicks = 40)
     public static void heatedBasinMeltsRawKidayWithoutSuperheat(GameTestHelper helper) {

@@ -8,6 +8,8 @@ import com.farukylmz.createkiday.registry.ModEntities;
 import com.farukylmz.createkiday.registry.ModRecipes;
 import com.farukylmz.createkiday.registry.ModMobEffects;
 import com.farukylmz.createkiday.registry.ModCreativeTabs;
+import com.farukylmz.createkiday.registry.ModDataComponents;
+import com.farukylmz.createkiday.registry.ModMenus;
 import com.farukylmz.createkiday.network.LaunchDiskPayload;
 import com.farukylmz.createkiday.network.OpenChroniclePayload;
 import com.farukylmz.createkiday.network.SaveTagFilterPayload;
@@ -43,6 +45,8 @@ public final class CreateKidayMod {
         ModBlocks.register(modBus);
         ModEquipment.register(modBus);
         ModItems.register(modBus);
+        ModDataComponents.register(modBus);
+        ModMenus.register(modBus);
         ModBlockEntities.register(modBus);
         ModEntities.register(modBus);
         ModRecipes.register(modBus);
