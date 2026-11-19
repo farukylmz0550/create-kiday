@@ -11,17 +11,14 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.minecraft.client.KeyMapping;
 import com.mojang.blaze3d.platform.InputConstants;
 import org.lwjgl.glfw.GLFW;
 import com.farukylmz.createkiday.registry.ModEntities;
 import com.farukylmz.createkiday.registry.ModBlockEntities;
-import com.farukylmz.createkiday.registry.ModMenus;
 import com.farukylmz.createkiday.compat.ponder.KidayPonderPlugin;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.common.NeoForge;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 
@@ -68,14 +65,8 @@ public final class KidayClient {
     }
 
     @SubscribeEvent
-    public static void registerMenuScreens(RegisterMenuScreensEvent event) {
-        event.register(ModMenus.TAG_FILTER.get(), TagFilterScreen::new);
-    }
-
-    @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         PonderIndex.addPlugin(new KidayPonderPlugin());
-        NeoForge.EVENT_BUS.addListener(TagFilterScreen::onTagsUpdated);
         event.enqueueWork(() -> {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.KIDAY_DOOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.KIDAY_TRAPDOOR.get(), RenderType.cutout());

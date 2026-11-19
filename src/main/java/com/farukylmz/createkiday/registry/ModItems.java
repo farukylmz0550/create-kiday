@@ -7,7 +7,6 @@ import com.farukylmz.createkiday.item.HunterBraceletItem;
 import com.farukylmz.createkiday.item.KidayChronicleItem;
 import com.farukylmz.createkiday.item.KidayMoldItem;
 import com.farukylmz.createkiday.item.KidayTier;
-import com.farukylmz.createkiday.item.TagFilterItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -56,8 +55,6 @@ public final class ModItems {
     public static final DeferredItem<KidayChronicleItem> KIDAY_CHRONICLE = EQUIPMENT.addAndReturn(ITEMS.register("kiday_chronicle", () -> new KidayChronicleItem(new Item.Properties())));
     public static final DeferredItem<Item> STORM_AMULET = EQUIPMENT.addAndReturn(
             ITEMS.registerSimpleItem("storm_amulet", new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<TagFilterItem> TAG_FILTER = EQUIPMENT.addAndReturn(
-            ITEMS.register("tag_filter", () -> new TagFilterItem(new Item.Properties().stacksTo(1))));
     public static final DeferredItem<DeferredSpawnEggItem> LEI_GONG_SPAWN_EGG = EQUIPMENT.addAndReturn(
             ITEMS.register("lei_gong_spawn_egg", () -> new DeferredSpawnEggItem(
                     ModEntities.LEI_GONG::get, 0xD9B54A, 0x3B334A, new Item.Properties())));

@@ -8,11 +8,8 @@ import com.farukylmz.createkiday.registry.ModEntities;
 import com.farukylmz.createkiday.registry.ModRecipes;
 import com.farukylmz.createkiday.registry.ModMobEffects;
 import com.farukylmz.createkiday.registry.ModCreativeTabs;
-import com.farukylmz.createkiday.registry.ModDataComponents;
-import com.farukylmz.createkiday.registry.ModMenus;
 import com.farukylmz.createkiday.network.LaunchDiskPayload;
 import com.farukylmz.createkiday.network.OpenChroniclePayload;
-import com.farukylmz.createkiday.network.SaveTagFilterPayload;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import com.farukylmz.createkiday.registry.ModItems;
 import com.mojang.logging.LogUtils;
@@ -45,8 +42,6 @@ public final class CreateKidayMod {
         ModBlocks.register(modBus);
         ModEquipment.register(modBus);
         ModItems.register(modBus);
-        ModDataComponents.register(modBus);
-        ModMenus.register(modBus);
         ModBlockEntities.register(modBus);
         ModEntities.register(modBus);
         ModRecipes.register(modBus);
@@ -95,7 +90,6 @@ public final class CreateKidayMod {
     private void registerPayloads(RegisterPayloadHandlersEvent event) {
         event.registrar("1")
                 .playToServer(LaunchDiskPayload.TYPE, LaunchDiskPayload.STREAM_CODEC, LaunchDiskPayload::handle)
-                .playToServer(SaveTagFilterPayload.TYPE, SaveTagFilterPayload.STREAM_CODEC, SaveTagFilterPayload::handle)
                 .playToClient(OpenChroniclePayload.TYPE, OpenChroniclePayload.STREAM_CODEC, OpenChroniclePayload::handle);
     }
 
