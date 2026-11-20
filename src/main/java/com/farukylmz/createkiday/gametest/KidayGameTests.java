@@ -31,6 +31,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
@@ -156,9 +157,15 @@ public final class KidayGameTests {
 
     @GameTest(template = "empty", timeoutTicks = 40)
     public static void dedicatedCreativeTabIsRegistered(GameTestHelper helper) {
-        ResourceLocation expected = ResourceLocation.fromNamespaceAndPath("create_kiday", "kiday");
-        helper.assertTrue(BuiltInRegistries.CREATIVE_MODE_TAB.getKey(ModCreativeTabs.KIDAY.get()).equals(expected),
-                "The Create: Kiday creative tab is not registered");
+        ResourceLocation minerals = ResourceLocation.fromNamespaceAndPath("create_kiday", "kiday_minerals");
+        ResourceLocation wood = ResourceLocation.fromNamespaceAndPath("create_kiday", "kiday_wood");
+        ResourceLocation other = ResourceLocation.fromNamespaceAndPath("create_kiday", "kiday_other");
+        helper.assertTrue(BuiltInRegistries.CREATIVE_MODE_TAB.getKey(ModCreativeTabs.KIDAY_MINERALS.get()).equals(minerals),
+                "The Kiday Minerals creative tab is not registered");
+        helper.assertTrue(BuiltInRegistries.CREATIVE_MODE_TAB.getKey(ModCreativeTabs.KIDAY_WOOD.get()).equals(wood),
+                "The Kiday Wood creative tab is not registered");
+        helper.assertTrue(BuiltInRegistries.CREATIVE_MODE_TAB.getKey(ModCreativeTabs.KIDAY_OTHER.get()).equals(other),
+                "The Kiday Other creative tab is not registered");
         helper.succeed();
     }
 
@@ -413,6 +420,44 @@ public final class KidayGameTests {
     }
 
     @GameTest(template = "empty", timeoutTicks = 40)
+    public static void kidayDoorsRequireRedstoneAndTrackPower(GameTestHelper helper) {
+        BlockPos doorPos = new BlockPos(2, 1, 2);
+        BlockPos trapdoorPos = new BlockPos(6, 1, 2);
+        BlockPos doorPower = doorPos.west();
+        BlockPos trapdoorPower = trapdoorPos.west();
+
+        helper.setBlock(doorPos.below(), Blocks.STONE);
+        helper.setBlock(doorPos, ModBlocks.KIDAY_DOOR.get());
+        helper.setBlock(doorPos.above(), ModBlocks.KIDAY_DOOR.get().defaultBlockState()
+                .setValue(net.minecraft.world.level.block.DoorBlock.HALF,
+                        net.minecraft.world.level.block.state.properties.DoubleBlockHalf.UPPER));
+        helper.setBlock(trapdoorPos, ModBlocks.KIDAY_TRAPDOOR.get());
+
+        helper.useBlock(doorPos);
+        helper.useBlock(trapdoorPos);
+        helper.assertFalse(helper.getBlockState(doorPos).getValue(net.minecraft.world.level.block.DoorBlock.OPEN),
+                "The Kiday door opened by hand");
+        helper.assertFalse(helper.getBlockState(trapdoorPos).getValue(net.minecraft.world.level.block.TrapDoorBlock.OPEN),
+                "The Kiday trapdoor opened by hand");
+
+        helper.setBlock(doorPower, Blocks.REDSTONE_BLOCK);
+        helper.setBlock(trapdoorPower, Blocks.REDSTONE_BLOCK);
+
+        helper.assertTrue(helper.getBlockState(doorPos).getValue(net.minecraft.world.level.block.DoorBlock.OPEN),
+                "The Kiday door did not open when powered");
+        helper.assertTrue(helper.getBlockState(trapdoorPos).getValue(net.minecraft.world.level.block.TrapDoorBlock.OPEN),
+                "The Kiday trapdoor did not open when powered");
+
+        helper.setBlock(doorPower, Blocks.AIR);
+        helper.setBlock(trapdoorPower, Blocks.AIR);
+        helper.assertFalse(helper.getBlockState(doorPos).getValue(net.minecraft.world.level.block.DoorBlock.OPEN),
+                "The Kiday door did not close when power was removed");
+        helper.assertFalse(helper.getBlockState(trapdoorPos).getValue(net.minecraft.world.level.block.TrapDoorBlock.OPEN),
+                "The Kiday trapdoor did not close when power was removed");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40)
     public static void breakingDoorDropsExactlyOneDoor(GameTestHelper helper) {
         BlockPos lowerBreak = new BlockPos(1, 1, 1);
         BlockPos upperBreak = new BlockPos(4, 1, 1);
@@ -625,8 +670,14 @@ public final class KidayGameTests {
     public static void stormGroveIsWideAndExclusivelySpawnsLeiGong(GameTestHelper helper) {
         var biomes = helper.getLevel().registryAccess().registryOrThrow(Registries.BIOME);
         var stormGrove = biomes.getHolderOrThrow(ModBiomes.STORM_GROVE);
-        helper.assertTrue(ModBiomes.STORM_GROVE_WIDTH >= 500,
-                "Storm Grove regions are narrower than 500 blocks");
+        helper.assertTrue(ModBiomes.STORM_GROVE_WIDTH >= 320 && ModBiomes.STORM_GROVE_WIDTH <= 500,
+                "Storm Grove region width is outside the intended 320–500 block range");
+        var treeFeatureKey = ResourceKey.create(Registries.PLACED_FEATURE,
+                ResourceLocation.fromNamespaceAndPath("create_kiday", "waqwaq_trees"));
+        var treeFeature = helper.getLevel().registryAccess().registryOrThrow(Registries.PLACED_FEATURE)
+                .getHolderOrThrow(treeFeatureKey).value();
+        helper.assertTrue(stormGrove.value().getGenerationSettings().hasFeature(treeFeature),
+                "Waqwaq tree placed feature is missing from Storm Grove generation settings");
         helper.assertTrue(stormGrove.value().getMobSettings().getMobs(MobCategory.MONSTER).unwrap().stream()
                         .anyMatch(spawn -> spawn.type == ModEntities.LEI_GONG.get()),
                 "Storm Grove does not naturally spawn Lei Gong");
@@ -673,10 +724,10 @@ public final class KidayGameTests {
                 "lightning_engine", "kiday_chronicle", "hunter_bracelet",
                 "kiday_sword", "kiday_pickaxe", "kiday_axe", "kiday_shovel", "kiday_hoe",
                 "melting_raw_kiday", "pressing_kiday_sheet"));
-        required.addAll(List.of("vakvak_planks", "vakvak_planks_from_wood", "vakvak_planks_from_stripped_log",
-                "vakvak_planks_from_stripped_wood", "vakvak_sticks", "vakvak_stairs", "vakvak_slab",
-                "vakvak_fence", "vakvak_fence_gate", "vakvak_door", "vakvak_trapdoor",
-                "vakvak_pressure_plate", "vakvak_button", "vakvak_boat", "vakvak_chest_boat"));
+        required.addAll(List.of("waqwaq_planks", "waqwaq_planks_from_wood", "waqwaq_planks_from_stripped_log",
+                "waqwaq_planks_from_stripped_wood", "waqwaq_sticks", "waqwaq_stairs", "waqwaq_slab",
+                "waqwaq_fence", "waqwaq_fence_gate", "waqwaq_door", "waqwaq_trapdoor",
+                "waqwaq_pressure_plate", "waqwaq_button", "waqwaq_boat", "waqwaq_chest_boat"));
         for (String mold : List.of("ingot", "sword_head", "pickaxe_head", "axe_head", "shovel_head", "hoe_head",
                 "helmet", "chestplate", "leggings", "boots", "trapdoor", "bracelet_frame")) {
             required.add("casting_" + mold);
@@ -694,18 +745,38 @@ public final class KidayGameTests {
     }
 
     @GameTest(template = "empty", timeoutTicks = 40)
-    public static void vakvakSaplingGrowsABranchedTreeWithBonemeal(GameTestHelper helper) {
+    public static void generatedWaqwaqTreeHasTwoToFiveFruits(GameTestHelper helper) {
+        BlockPos base = new BlockPos(8, 20, 8);
+        for (int x = -6; x <= 6; x++) for (int z = -6; z <= 6; z++)
+            helper.setBlock(base.offset(x, -1, z), Blocks.DIRT);
+        var key = ResourceKey.create(Registries.CONFIGURED_FEATURE,
+                ResourceLocation.fromNamespaceAndPath("create_kiday", "waqwaq_tree"));
+        var configured = helper.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE)
+                .getHolderOrThrow(key).value();
+        BlockPos worldBase = helper.absolutePos(base);
+        helper.assertTrue(configured.place(helper.getLevel(), helper.getLevel().getChunkSource().getGenerator(),
+                helper.getLevel().random, worldBase), "Configured Waqwaq tree feature did not place");
+        int fruitCount = 0;
+        for (int x = -6; x <= 6; x++) for (int y = 0; y <= 18; y++) for (int z = -6; z <= 6; z++)
+            if (helper.getLevel().getBlockState(worldBase.offset(x, y, z)).is(ModBlocks.WAQWAQ_FRUIT.get())) fruitCount++;
+        helper.assertTrue(fruitCount >= 2 && fruitCount <= 5,
+                "A generated Waqwaq tree should have 2–5 fruits, found " + fruitCount);
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40)
+    public static void waqwaqSaplingGrowsABranchedTreeWithBonemeal(GameTestHelper helper) {
         BlockPos base = new BlockPos(8, 20, 8);
         for (int x = -5; x <= 5; x++) {
             for (int z = -5; z <= 5; z++) helper.setBlock(base.offset(x, 0, z), Blocks.DIRT);
         }
-        helper.setBlock(base.above(), ModBlocks.VAKVAK_SAPLING.get().defaultBlockState()
+        helper.setBlock(base.above(), ModBlocks.WAQWAQ_SAPLING.get().defaultBlockState()
                 .setValue(net.minecraft.world.level.block.SaplingBlock.STAGE, 1));
-        var sapling = ModBlocks.VAKVAK_SAPLING.get();
+        var sapling = ModBlocks.WAQWAQ_SAPLING.get();
         BlockPos worldBase = helper.absolutePos(base);
         var state = helper.getLevel().getBlockState(worldBase.above());
         helper.assertTrue(sapling.isValidBonemealTarget(helper.getLevel(), worldBase.above(), state),
-                "Vakvak sapling cannot receive bonemeal");
+                "Waqwaq sapling cannot receive bonemeal");
         sapling.performBonemeal(helper.getLevel(), helper.getLevel().random, worldBase.above(), state);
         int logs = 0;
         int branchLogs = 0;
@@ -713,7 +784,7 @@ public final class KidayGameTests {
             for (int y = 1; y <= 16; y++) {
                 for (int z = -5; z <= 5; z++) {
                     var grown = helper.getLevel().getBlockState(worldBase.offset(x, y, z));
-                    if (grown.is(ModBlocks.VAKVAK_LOG.get())) {
+                    if (grown.is(ModBlocks.WAQWAQ_LOG.get())) {
                         logs++;
                         if (grown.getValue(net.minecraft.world.level.block.RotatedPillarBlock.AXIS)
                                 != net.minecraft.core.Direction.Axis.Y) branchLogs++;
@@ -721,39 +792,39 @@ public final class KidayGameTests {
                 }
             }
         }
-        helper.assertTrue(logs >= 8, "Bonemeal did not grow a full Vakvak tree: logs=" + logs);
-        helper.assertTrue(branchLogs >= 2, "Vakvak tree grew without visible branch logs: branches=" + branchLogs);
+        helper.assertTrue(logs >= 8, "Bonemeal did not grow a full Waqwaq tree: logs=" + logs);
+        helper.assertTrue(branchLogs >= 2, "Waqwaq tree grew without visible branch logs: branches=" + branchLogs);
         helper.succeed();
     }
 
     @GameTest(template = "empty", timeoutTicks = 40)
-    public static void vakvakFruitGrantsSixtySecondLightningProtectionOnly(GameTestHelper helper) {
+    public static void waqwaqFruitGrantsSixtySecondLightningProtectionOnly(GameTestHelper helper) {
         ServerPlayer player = new DamageableFakePlayer(helper.getLevel(),
-                new GameProfile(UUID.randomUUID(), "vakvak-fruit-eater"));
+                new GameProfile(UUID.randomUUID(), "waqwaq-fruit-eater"));
         helper.getLevel().addNewPlayer(player);
         player.setGameMode(GameType.SURVIVAL);
         player.getAbilities().invulnerable = false;
         disableSpawnProtection(player);
         player.setPos(helper.absoluteVec(new Vec3(4.5, 1.1, 4.5)));
 
-        ItemStack fruit = ModBlocks.VAKVAK_FRUIT_ITEM.get().getDefaultInstance();
+        ItemStack fruit = ModBlocks.WAQWAQ_FRUIT_ITEM.get().getDefaultInstance();
         var food = fruit.get(DataComponents.FOOD);
         helper.assertTrue(food != null && food.nutrition() == 4 && food.canAlwaysEat(),
-                "Vakvak fruit must restore four hunger points and be edible when full");
+                "Waqwaq fruit must restore four hunger points and be edible when full");
         fruit.finishUsingItem(helper.getLevel(), player);
-        var blessing = player.getEffect(ModMobEffects.VAKVAK_BLESSING);
+        var blessing = player.getEffect(ModMobEffects.WAQWAQ_BLESSING);
         helper.assertTrue(blessing != null && blessing.getDuration() == 1200,
-                "Eating Vakvak fruit did not apply its 1200 tick blessing");
+                "Eating Waqwaq fruit did not apply its 1200 tick blessing");
 
         float health = player.getHealth();
         player.hurt(helper.getLevel().damageSources().lightningBolt(), 6.0F);
-        helper.assertTrue(player.getHealth() == health, "Vakvak's Blessing did not block vanilla lightning");
+        helper.assertTrue(player.getHealth() == health, "Waqwaq's Blessing did not block vanilla lightning");
         player.invulnerableTime = 0;
         player.hurt(helper.getLevel().damageSources().source(ModDamageTypes.LEI_GONG_ELECTRICITY), 6.0F);
-        helper.assertTrue(player.getHealth() == health, "Vakvak's Blessing did not block Lei Gong's electricity");
+        helper.assertTrue(player.getHealth() == health, "Waqwaq's Blessing did not block Lei Gong's electricity");
         player.invulnerableTime = 0;
         player.hurt(helper.getLevel().damageSources().inFire(), 2.0F);
-        helper.assertTrue(player.getHealth() < health, "Vakvak's Blessing incorrectly blocked non-lightning damage");
+        helper.assertTrue(player.getHealth() < health, "Waqwaq's Blessing incorrectly blocked non-lightning damage");
         helper.getLevel().removePlayerImmediately(player, Entity.RemovalReason.DISCARDED);
         helper.succeed();
     }

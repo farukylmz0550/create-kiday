@@ -19,7 +19,7 @@ import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BucketItem;
-import com.farukylmz.createkiday.item.VakvakBoatItem;
+import com.farukylmz.createkiday.item.WaqwaqBoatItem;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -59,10 +59,10 @@ public final class ModItems {
     public static final DeferredItem<DeferredSpawnEggItem> LEI_GONG_SPAWN_EGG = EQUIPMENT.addAndReturn(
             ITEMS.register("lei_gong_spawn_egg", () -> new DeferredSpawnEggItem(
                     ModEntities.LEI_GONG::get, 0xD9B54A, 0x3B334A, new Item.Properties())));
-    public static final DeferredItem<VakvakBoatItem> VAKVAK_BOAT = EQUIPMENT.addAndReturn(
-            ITEMS.register("vakvak_boat", () -> new VakvakBoatItem(false, new Item.Properties().stacksTo(1))));
-    public static final DeferredItem<VakvakBoatItem> VAKVAK_CHEST_BOAT = EQUIPMENT.addAndReturn(
-            ITEMS.register("vakvak_chest_boat", () -> new VakvakBoatItem(true, new Item.Properties().stacksTo(1))));
+    public static final DeferredItem<WaqwaqBoatItem> WAQWAQ_BOAT = EQUIPMENT.addAndReturn(
+            ITEMS.register("waqwaq_boat", () -> new WaqwaqBoatItem(false, new Item.Properties().stacksTo(1))));
+    public static final DeferredItem<WaqwaqBoatItem> WAQWAQ_CHEST_BOAT = EQUIPMENT.addAndReturn(
+            ITEMS.register("waqwaq_chest_boat", () -> new WaqwaqBoatItem(true, new Item.Properties().stacksTo(1))));
 
     public static final List<DeferredItem<KidayMoldItem>> SHAPED_MOLDS = List.of(
             mold("ingot_mold", 1), mold("sword_head_mold", 2), mold("pickaxe_head_mold", 3), mold("axe_head_mold", 3),

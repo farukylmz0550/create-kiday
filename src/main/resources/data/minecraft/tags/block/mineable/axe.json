@@ -1,18 +1,18 @@
 {
   "replace": false,
   "values": [
-    "create_kiday:vakvak_log",
-    "create_kiday:vakvak_wood",
-    "create_kiday:stripped_vakvak_log",
-    "create_kiday:stripped_vakvak_wood",
-    "create_kiday:vakvak_planks",
-    "create_kiday:vakvak_stairs",
-    "create_kiday:vakvak_slab",
-    "create_kiday:vakvak_fence",
-    "create_kiday:vakvak_fence_gate",
-    "create_kiday:vakvak_door",
-    "create_kiday:vakvak_trapdoor",
-    "create_kiday:vakvak_button",
-    "create_kiday:vakvak_pressure_plate"
+    "create_kiday:waqwaq_log",
+    "create_kiday:waqwaq_wood",
+    "create_kiday:stripped_waqwaq_log",
+    "create_kiday:stripped_waqwaq_wood",
+    "create_kiday:waqwaq_planks",
+    "create_kiday:waqwaq_stairs",
+    "create_kiday:waqwaq_slab",
+    "create_kiday:waqwaq_fence",
+    "create_kiday:waqwaq_fence_gate",
+    "create_kiday:waqwaq_door",
+    "create_kiday:waqwaq_trapdoor",
+    "create_kiday:waqwaq_button",
+    "create_kiday:waqwaq_pressure_plate"
   ]
 }

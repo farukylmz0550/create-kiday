@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "create_kiday:block/waqwaq_fruit_stage_2"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "create_kiday:block/waqwaq_door_bottom",
+    "top": "create_kiday:block/waqwaq_door_top"
+  }
+}

@@ -12,7 +12,7 @@ public final class ModMobEffects {
     private static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, CreateKidayMod.MOD_ID);
     public static final DeferredHolder<MobEffect, MobEffect> STUN = EFFECTS.register("stun",
             () -> new MobEffect(MobEffectCategory.HARMFUL, 0x75D8F2) { });
-    public static final DeferredHolder<MobEffect, MobEffect> VAKVAK_BLESSING = EFFECTS.register("vakvak_blessing",
+    public static final DeferredHolder<MobEffect, MobEffect> WAQWAQ_BLESSING = EFFECTS.register("waqwaq_blessing",
             () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x173D52) { });
 
     private ModMobEffects() {

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "create_kiday:waqwaq_planks"
+    }
+  },
+  "result": {
+    "id": "create_kiday:waqwaq_boat"
+  }
+}

@@ -11,6 +11,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraft.client.KeyMapping;
 import com.mojang.blaze3d.platform.InputConstants;
 import org.lwjgl.glfw.GLFW;
@@ -60,11 +61,17 @@ public final class KidayClient {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.HUNTER_DISK.get(), HunterDiskRenderer::new);
         event.registerEntityRenderer(ModEntities.LEI_GONG.get(), LeiGongRenderer::new);
-        event.registerEntityRenderer(ModEntities.VAKVAK_BOAT.get(), context -> new VakvakBoatRenderer(context, false));
-        event.registerEntityRenderer(ModEntities.VAKVAK_CHEST_BOAT.get(), context -> new VakvakBoatRenderer(context, true));
+        event.registerEntityRenderer(ModEntities.WAQWAQ_BOAT.get(), context -> new WaqwaqBoatRenderer(context, false));
+        event.registerEntityRenderer(ModEntities.WAQWAQ_CHEST_BOAT.get(), context -> new WaqwaqBoatRenderer(context, true));
         event.registerBlockEntityRenderer(ModBlockEntities.CASTING_TABLE.get(), CastingTableRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.LIGHTNING_ENGINE.get(), LightningEngineRenderer::new);
     }
+
+    @SubscribeEvent
+    public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event) {
+        event.registerReloadListener(new WaqwaqBoatTextures());
+    }
+
 
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
@@ -72,6 +79,9 @@ public final class KidayClient {
         event.enqueueWork(() -> {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.KIDAY_DOOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.KIDAY_TRAPDOOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.WAQWAQ_LEAVES.get(), RenderType.cutoutMipped());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.WAQWAQ_SAPLING.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.WAQWAQ_FRUIT.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.MOLTEN_KIDAY.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_MOLTEN_KIDAY.get(), RenderType.translucent());
         });

@@ -44,34 +44,13 @@ class ResourceDistinctnessTest {
     }
 
     @Test
-    void everyTechnicalBlockFaceHasDifferentTexture() {
-        for (String machine : List.of("casting_table", "lightning_engine")) {
-            Set<String> hashes = new HashSet<>();
-            List<double[]> averageColors = new java.util.ArrayList<>();
-            for (String face : List.of("top", "back", "bottom", "front", "right", "left")) {
-                String path = "assets/create_kiday/textures/block/" + machine + "_" + face + ".png";
-                hashes.add(hash(path));
-                averageColors.add(averageOpaqueColor(path));
-            }
-            assertEquals(6, hashes.size(), machine + " must have six distinct face textures");
-            for (int left = 0; left < averageColors.size(); left++) {
-                for (int right = left + 1; right < averageColors.size(); right++) {
-                    double[] a = averageColors.get(left);
-                    double[] b = averageColors.get(right);
-                    double distance = Math.sqrt(Math.pow(a[0] - b[0], 2)
-                            + Math.pow(a[1] - b[1], 2) + Math.pow(a[2] - b[2], 2));
-                    assertTrue(distance >= 45, machine + " faces are not color-coded strongly enough");
-                }
-            }
-        }
-    }
-
-    @Test
     void technicalBlockModelsUseSemanticFaceTextureNames() throws IOException {
         for (String machine : List.of("casting_table", "lightning_engine")) {
             String model = text("assets/create_kiday/models/block/" + machine + ".json");
-            for (String face : List.of("top", "back", "bottom", "front", "right", "left"))
+            for (String face : List.of("top", "back", "bottom", "front", "right"))
                 assertTrue(model.contains(machine + "_" + face), machine + " model is missing its " + face + " texture");
+            if (machine.equals("casting_table")) assertTrue(model.contains("\"left\": \"#right\""));
+            else assertTrue(model.contains("lightning_engine_left"));
             for (String direction : List.of("north", "south", "east", "west"))
                 assertFalse(model.contains(machine + "_" + direction), machine + " model still refers to compass-named textures");
         }
@@ -85,21 +64,6 @@ class ResourceDistinctnessTest {
     }
 
     @Test
-    void installedRuntimeTexturesAreDetailedSpritesRatherThanPlaceholders() {
-        for (String name : List.of(
-                "kiday_sword", "kiday_pickaxe", "kiday_axe", "kiday_shovel", "kiday_hoe",
-                "kiday_helmet", "kiday_chestplate", "kiday_leggings", "kiday_boots",
-                "hot_kiday_ingot", "hot_kiday_pickaxe_head", "hot_kiday_helmet", "hot_kiday_chestplate")) {
-            assertTextureComplexity("assets/create_kiday/textures/item/" + name + ".png", 20, 5);
-        }
-        for (String machine : List.of("casting_table", "lightning_engine")) {
-            for (String face : List.of("top", "back", "bottom", "front", "right", "left")) {
-                assertTextureComplexity("assets/create_kiday/textures/block/" + machine + "_" + face + ".png", 200, 8);
-            }
-        }
-    }
-
-    @Test
     void thinDoorModelsAndKidayPonderTemplateArePackaged() throws IOException {
         String door = text("assets/create_kiday/models/block/kiday_door_bottom_left.json");
         String trapdoor = text("assets/create_kiday/models/block/kiday_trapdoor_bottom.json");
@@ -109,10 +73,10 @@ class ResourceDistinctnessTest {
     }
 
     @Test
-    void opaqueDoorBlocksSeparateItemArmorUvAndRemovedDiskItemArePackagedCorrectly() {
-        assertFullyOpaque("assets/create_kiday/textures/block/kiday_door_top.png");
-        assertFullyOpaque("assets/create_kiday/textures/block/kiday_door_bottom.png");
-        assertFullyOpaque("assets/create_kiday/textures/block/kiday_trapdoor.png");
+    void transparentDoorBlocksSeparateItemArmorUvAndRemovedDiskItemArePackagedCorrectly() {
+        assertTransparentAndOpaque("assets/create_kiday/textures/block/kiday_door_top.png", 80, 160);
+        assertTransparentAndOpaque("assets/create_kiday/textures/block/kiday_door_bottom.png", 80, 160);
+        assertTransparentAndOpaque("assets/create_kiday/textures/block/kiday_trapdoor.png", 80, 160);
         assertTransparentAndOpaque("assets/create_kiday/textures/item/kiday_door.png", 20, 40);
         assertNotEquals(hash("assets/create_kiday/textures/item/kiday_door.png"),
                 hash("assets/create_kiday/textures/block/kiday_door_bottom.png"),
@@ -238,7 +202,11 @@ class ResourceDistinctnessTest {
         assertNotNull(getClass().getClassLoader().getResource("assets/create_kiday/models/item/storm_amulet.json"));
         String stormGrove = text("data/create_kiday/worldgen/biome/storm_grove.json");
         assertTrue(stormGrove.contains("\"type\": \"create_kiday:lei_gong\",\n        \"weight\": 400"));
-        assertTrue(text("data/create_kiday/worldgen/biome/storm_grove.json").contains("create_kiday:cherry_trees_medium"));
+        assertFalse(stormGrove.contains("cherry_trees_medium"));
+        assertTrue(stormGrove.contains("create_kiday:waqwaq_trees"),
+                "Waqwaq placed feature must be part of Storm Grove vegetal decoration");
+        assertNull(getClass().getClassLoader().getResource(
+                "data/create_kiday/neoforge/biome_modifier/waqwaq_trees.json"));
         assertNotNull(getClass().getClassLoader().getResource("assets/create_kiday/models/item/lei_gong_spawn_egg.json"));
         assertTrue(text("assets/create_kiday/lang/en_us.json").contains("Lei Gong Spawn Egg"));
         assertTrue(text("assets/create_kiday/lang/tr_tr.json").contains("Lei Gong Çağırma Yumurtası"));

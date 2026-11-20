@@ -18,11 +18,10 @@ import com.mojang.logging.LogUtils;
 import com.farukylmz.createkiday.recipe.PatternShapingDeployerRecipe;
 import com.farukylmz.createkiday.advancement.KidayAdvancements;
 import com.simibubi.create.content.kinetics.deployer.DeployerRecipeSearchEvent;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.minecraft.world.entity.SpawnPlacementTypes;
@@ -32,6 +31,9 @@ import com.farukylmz.createkiday.registry.ModBiomes;
 import com.farukylmz.createkiday.gameplay.StormGroveBiomeResolver;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FireBlock;
 import org.slf4j.Logger;
 
 @Mod(CreateKidayMod.MOD_ID)
@@ -52,14 +54,39 @@ public final class CreateKidayMod {
         ModFeatures.register(modBus);
         ModCreativeTabs.register(modBus);
         modBus.addListener(this::registerPayloads);
-        modBus.addListener(this::addCreativeItems);
         modBus.addListener(this::registerEntityAttributes);
         modBus.addListener(this::registerSpawnPlacements);
+        modBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.addListener(this::addPatternDeployerRecipe);
         NeoForge.EVENT_BUS.addListener(KidayAdvancements::onKidayOreDrops);
         NeoForge.EVENT_BUS.addListener(KidayAdvancements::checkCompletion);
         NeoForge.EVENT_BUS.addListener(this::bindStormGroveBiome);
         NeoForge.EVENT_BUS.addListener(this::clearStormGroveBiome);
+    }
+
+    private void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            FireBlock fire = (FireBlock) Blocks.FIRE;
+            // Waqwaq blocks burn when fire touches them, but do not fuel spreading fire.
+            setWaqwaqFlammable(fire, ModBlocks.WAQWAQ_LOG.get(), 5);
+            setWaqwaqFlammable(fire, ModBlocks.WAQWAQ_WOOD_BLOCK.get(), 5);
+            setWaqwaqFlammable(fire, ModBlocks.STRIPPED_WAQWAQ_LOG.get(), 5);
+            setWaqwaqFlammable(fire, ModBlocks.STRIPPED_WAQWAQ_WOOD.get(), 5);
+            setWaqwaqFlammable(fire, ModBlocks.WAQWAQ_PLANKS.get(), 20);
+            setWaqwaqFlammable(fire, ModBlocks.WAQWAQ_STAIRS.get(), 20);
+            setWaqwaqFlammable(fire, ModBlocks.WAQWAQ_SLAB.get(), 20);
+            setWaqwaqFlammable(fire, ModBlocks.WAQWAQ_FENCE.get(), 20);
+            setWaqwaqFlammable(fire, ModBlocks.WAQWAQ_FENCE_GATE.get(), 20);
+            setWaqwaqFlammable(fire, ModBlocks.WAQWAQ_DOOR.get(), 20);
+            setWaqwaqFlammable(fire, ModBlocks.WAQWAQ_TRAPDOOR.get(), 20);
+            setWaqwaqFlammable(fire, ModBlocks.WAQWAQ_BUTTON.get(), 20);
+            setWaqwaqFlammable(fire, ModBlocks.WAQWAQ_PRESSURE_PLATE.get(), 20);
+            setWaqwaqFlammable(fire, ModBlocks.WAQWAQ_LEAVES.get(), 60);
+        });
+    }
+
+    private static void setWaqwaqFlammable(FireBlock fire, Block block, int flammability) {
+        fire.setFlammable(block, 0, flammability);
     }
 
 
@@ -98,42 +125,4 @@ public final class CreateKidayMod {
                 .playToClient(OpenChroniclePayload.TYPE, OpenChroniclePayload.STREAM_CODEC, OpenChroniclePayload::handle);
     }
 
-    private void addCreativeItems(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            ModItems.visibleIngredients().forEach(item -> event.accept(item.get()));
-        }
-        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            ModItems.visibleEquipment().forEach(item -> event.accept(item.get()));
-        }
-        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
-            event.accept(ModItems.LEI_GONG_SPAWN_EGG.get());
-        }
-        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(ModBlocks.KIDAY_BLOCK_ITEM);
-            event.accept(ModBlocks.KIDAY_DOOR_ITEM);
-            event.accept(ModBlocks.KIDAY_TRAPDOOR_ITEM);
-            event.accept(ModBlocks.CASTING_TABLE_ITEM);
-            event.accept(ModBlocks.LIGHTNING_ENGINE_ITEM);
-            event.accept(ModBlocks.VAKVAK_LOG_ITEM);
-            event.accept(ModBlocks.VAKVAK_WOOD_ITEM);
-            event.accept(ModBlocks.STRIPPED_VAKVAK_LOG_ITEM);
-            event.accept(ModBlocks.STRIPPED_VAKVAK_WOOD_ITEM);
-            event.accept(ModBlocks.VAKVAK_PLANKS_ITEM);
-            event.accept(ModBlocks.VAKVAK_STAIRS_ITEM);
-            event.accept(ModBlocks.VAKVAK_SLAB_ITEM);
-            event.accept(ModBlocks.VAKVAK_FENCE_ITEM);
-            event.accept(ModBlocks.VAKVAK_FENCE_GATE_ITEM);
-            event.accept(ModBlocks.VAKVAK_DOOR_ITEM);
-            event.accept(ModBlocks.VAKVAK_TRAPDOOR_ITEM);
-            event.accept(ModBlocks.VAKVAK_BUTTON_ITEM);
-            event.accept(ModBlocks.VAKVAK_PRESSURE_PLATE_ITEM);
-        }
-        if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
-            event.accept(ModBlocks.KIDAY_ORE_ITEM);
-            event.accept(ModBlocks.DEEPSLATE_KIDAY_ORE_ITEM);
-            event.accept(ModBlocks.VAKVAK_LEAVES_ITEM);
-            event.accept(ModBlocks.VAKVAK_SAPLING_ITEM);
-            event.accept(ModBlocks.VAKVAK_FRUIT_ITEM);
-        }
-    }
 }

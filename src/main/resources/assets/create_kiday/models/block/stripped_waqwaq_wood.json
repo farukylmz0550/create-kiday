@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "create_kiday:block/stripped_waqwaq_log",
+    "side": "create_kiday:block/stripped_waqwaq_log"
+  }
+}

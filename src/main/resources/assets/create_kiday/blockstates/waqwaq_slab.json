@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "create_kiday:block/waqwaq_slab"
+    },
+    "type=double": {
+      "model": "create_kiday:block/waqwaq_planks"
+    },
+    "type=top": {
+      "model": "create_kiday:block/waqwaq_slab_top"
+    }
+  }
+}

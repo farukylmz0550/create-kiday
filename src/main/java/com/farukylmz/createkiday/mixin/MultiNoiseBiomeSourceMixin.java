@@ -28,26 +28,19 @@ public abstract class MultiNoiseBiomeSourceMixin {
         int blockZ = QuartPos.toBlock(quartZ);
         if (blockY < 0) return;
 
-        int cellX = Math.floorDiv(blockX, ModBiomes.STORM_GROVE_REGION_SIZE);
-        int cellZ = Math.floorDiv(blockZ, ModBiomes.STORM_GROVE_REGION_SIZE);
         int localX = Math.floorMod(blockX, ModBiomes.STORM_GROVE_REGION_SIZE);
         int localZ = Math.floorMod(blockZ, ModBiomes.STORM_GROVE_REGION_SIZE);
         int margin = (ModBiomes.STORM_GROVE_REGION_SIZE - ModBiomes.STORM_GROVE_WIDTH) / 2;
         if (localX < margin || localX >= margin + ModBiomes.STORM_GROVE_WIDTH
                 || localZ < margin || localZ >= margin + ModBiomes.STORM_GROVE_WIDTH) return;
 
-        int centerQuartX = QuartPos.fromBlock(cellX * ModBiomes.STORM_GROVE_REGION_SIZE
-                + ModBiomes.STORM_GROVE_REGION_SIZE / 2);
-        int centerQuartZ = QuartPos.fromBlock(cellZ * ModBiomes.STORM_GROVE_REGION_SIZE
-                + ModBiomes.STORM_GROVE_REGION_SIZE / 2);
-        Climate.TargetPoint climate = sampler.sample(centerQuartX, QuartPos.fromBlock(64), centerQuartZ);
+        // Evaluate each quart column locally at a fixed climate height so groves stay on land
+        // and biome selection does not flicker between underground/surface quart samples.
+        Climate.TargetPoint climate = sampler.sample(quartX, QuartPos.fromBlock(64), quartZ);
         float continentalness = Climate.unquantizeCoord(climate.continentalness());
         float erosion = Climate.unquantizeCoord(climate.erosion());
-        if (continentalness < -0.1F || erosion < 0.2F) return;
-
-        long hash = cellX * 341873128712L + cellZ * 132897987541L
-                + climate.temperature() * 31L + climate.humidity() * 17L;
-        if (Math.floorMod(hash, 6L) != 0L) return;
+        float weirdness = Climate.unquantizeCoord(climate.weirdness());
+        if (continentalness < 0.1F || erosion < 0.25F || Math.abs(weirdness) > 0.55F) return;
 
         Holder<Biome> stormGrove = StormGroveBiomeResolver.get();
         if (stormGrove != null) callback.setReturnValue(stormGrove);

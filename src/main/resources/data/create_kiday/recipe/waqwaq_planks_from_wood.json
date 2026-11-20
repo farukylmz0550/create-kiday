@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create_kiday:waqwaq_wood"
+    }
+  ],
+  "result": {
+    "id": "create_kiday:waqwaq_planks",
+    "count": 4
+  }
+}
