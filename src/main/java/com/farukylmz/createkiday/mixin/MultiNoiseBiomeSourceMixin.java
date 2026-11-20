@@ -34,13 +34,16 @@ public abstract class MultiNoiseBiomeSourceMixin {
         if (localX < margin || localX >= margin + ModBiomes.STORM_GROVE_WIDTH
                 || localZ < margin || localZ >= margin + ModBiomes.STORM_GROVE_WIDTH) return;
 
-        // Evaluate each quart column locally at a fixed climate height so groves stay on land
-        // and biome selection does not flicker between underground/surface quart samples.
+        // Evaluate at a fixed climate height so biome selection does not flicker between
+        // underground and surface quart samples. The repeating footprint is independent of
+        // neighboring biome identities, so Storm Groves are not tied to mangrove swamps.
         Climate.TargetPoint climate = sampler.sample(quartX, QuartPos.fromBlock(64), quartZ);
         float continentalness = Climate.unquantizeCoord(climate.continentalness());
         float erosion = Climate.unquantizeCoord(climate.erosion());
         float weirdness = Climate.unquantizeCoord(climate.weirdness());
-        if (continentalness < 0.1F || erosion < 0.25F || Math.abs(weirdness) > 0.55F) return;
+        // Permit ordinary inland/coastal land broadly, while avoiding oceans and steep
+        // mountain climate bands to retain the grove's lowland character.
+        if (continentalness < -0.05F || erosion < 0.25F || Math.abs(weirdness) > 0.65F) return;
 
         Holder<Biome> stormGrove = StormGroveBiomeResolver.get();
         if (stormGrove != null) callback.setReturnValue(stormGrove);

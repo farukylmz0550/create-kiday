@@ -30,6 +30,7 @@ import com.farukylmz.createkiday.entity.LeiGongEntity;
 import com.farukylmz.createkiday.registry.ModBiomes;
 import com.farukylmz.createkiday.gameplay.StormGroveBiomeResolver;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -61,6 +62,7 @@ public final class CreateKidayMod {
         NeoForge.EVENT_BUS.addListener(KidayAdvancements::onKidayOreDrops);
         NeoForge.EVENT_BUS.addListener(KidayAdvancements::checkCompletion);
         NeoForge.EVENT_BUS.addListener(this::bindStormGroveBiome);
+        NeoForge.EVENT_BUS.addListener(this::refreshStormGroveFeatures);
         NeoForge.EVENT_BUS.addListener(this::clearStormGroveBiome);
     }
 
@@ -92,6 +94,13 @@ public final class CreateKidayMod {
 
     private void bindStormGroveBiome(ServerAboutToStartEvent event) {
         StormGroveBiomeResolver.bind(event.getServer());
+    }
+
+    private void refreshStormGroveFeatures(ServerStartedEvent event) {
+        var server = event.getServer();
+        // The generator may have validated and cached featuresPerStep before the biome was bound.
+        // Rebuild that cache now that Storm Grove is included in the Overworld's possible biomes.
+        server.overworld().getChunkSource().getGenerator().refreshFeaturesPerStep();
     }
 
     private void clearStormGroveBiome(ServerStoppedEvent event) {

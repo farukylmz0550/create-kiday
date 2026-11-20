@@ -84,8 +84,28 @@ public final class WaqwaqBoatTextures extends SimplePreparableReloadListener<Waq
         if (image.getWidth() != image.getHeight() || image.getWidth() % 16 != 0)
             throw new IllegalStateException("Unexpected vanilla boat item texture dimensions");
         int scale = image.getWidth() / 16;
-        if (chestBoat) tint(image, 0, 9, 16, 7, scale);
-        else tint(image, 0, 0, 16, 16, scale);
+        int startY = chestBoat ? 9 : 0;
+        int endY = chestBoat ? 16 : 16;
+        int redTint = TINT >>> 16 & 255;
+        int greenTint = TINT >>> 8 & 255;
+        int blueTint = TINT & 255;
+        for (int y = startY * scale; y < endY * scale; y++) {
+            for (int x = 0; x < 16 * scale; x++) {
+                int pixel = image.getPixelRGBA(x, y);
+                int alpha = pixel >>> 24;
+                if (alpha == 0) continue;
+
+                int sourceRed = pixel & 255;
+                int sourceGreen = pixel >>> 8 & 255;
+                int sourceBlue = pixel >>> 16 & 255;
+                int luminance = (sourceRed * 54 + sourceGreen * 183 + sourceBlue * 19) >> 8;
+                float shade = luminance / 128.0F;
+                int red = Math.min(255, Math.round(redTint * shade));
+                int green = Math.min(255, Math.round(greenTint * shade));
+                int blue = Math.min(255, Math.round(blueTint * shade));
+                image.setPixelRGBA(x, y, alpha << 24 | blue << 16 | green << 8 | red);
+            }
+        }
     }
 
     private static void tint(NativeImage image, int u, int v, int width, int height, int scale) {

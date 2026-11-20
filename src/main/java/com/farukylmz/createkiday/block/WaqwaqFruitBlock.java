@@ -20,9 +20,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import com.farukylmz.createkiday.registry.ModSounds;
 
 public final class WaqwaqFruitBlock extends Block implements BonemealableBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
@@ -65,8 +62,6 @@ public final class WaqwaqFruitBlock extends Block implements BonemealableBlock {
         }
         if (state.getValue(AGE) < 2 && random.nextInt(6) == 0) {
             level.setBlock(pos, state.setValue(AGE, state.getValue(AGE) + 1), 2);
-        } else if (state.getValue(AGE) == 2 && random.nextInt(180) == 0) {
-            level.playSound(null, pos, ModSounds.WAQWAQ_FRUIT_CHIME.get(), SoundSource.BLOCKS, 0.55F, 0.85F + random.nextFloat() * 0.3F);
         }
     }
 

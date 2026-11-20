@@ -4,6 +4,7 @@
   "package": "com.farukylmz.createkiday.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BiomeSourceMixin",
     "MultiNoiseBiomeSourceMixin",
     "PlayerStunMixin",
     "StormGroveFarmlandMixin",

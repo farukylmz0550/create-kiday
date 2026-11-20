@@ -10,8 +10,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 public final class ModSounds {
     private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, CreateKidayMod.MOD_ID);
-    public static final DeferredHolder<SoundEvent, SoundEvent> WAQWAQ_FRUIT_CHIME = SOUNDS.register("waqwaq_fruit_chime",
-            () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(CreateKidayMod.MOD_ID, "waqwaq_fruit_chime")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> WAQWAQ_FRUIT_MURMUR = SOUNDS.register("waqwaq_fruit_murmur",
+            () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(CreateKidayMod.MOD_ID, "waqwaq_fruit_murmur")));
 
     private ModSounds() {}
 

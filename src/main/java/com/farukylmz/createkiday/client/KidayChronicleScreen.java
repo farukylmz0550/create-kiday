@@ -29,23 +29,22 @@ public final class KidayChronicleScreen extends Screen {
 
     @Override
     protected void init() {
-        int left = (width - 384) / 2;
-        backButton = addRenderableWidget(new PageButton(left + 43, 159, false, button -> turn(-2), true));
-        forwardButton = addRenderableWidget(new PageButton(left + 308, 159, true, button -> turn(2), true));
+        int left = (width - 192) / 2;
+        backButton = addRenderableWidget(new PageButton(left + 8, 159, false, button -> turn(-1), true));
+        forwardButton = addRenderableWidget(new PageButton(left + 164, 159, true, button -> turn(1), true));
         addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, button -> onClose())
                 .bounds(width / 2 - 100, 196, 200, 20).build());
         updateButtons();
     }
 
     private void turn(int pages) {
-        firstPage = Math.clamp(firstPage + pages, 0, KidayChronicleItem.PAGE_COUNT - 2);
-        firstPage -= firstPage % 2;
+        firstPage = Math.clamp(firstPage + pages, 0, KidayChronicleItem.PAGE_COUNT - 1);
         updateButtons();
     }
 
     private void updateButtons() {
         if (backButton != null) backButton.visible = firstPage > 0;
-        if (forwardButton != null) forwardButton.visible = firstPage < KidayChronicleItem.PAGE_COUNT - 2;
+        if (forwardButton != null) forwardButton.visible = firstPage < KidayChronicleItem.PAGE_COUNT - 1;
     }
 
     @Override
@@ -54,7 +53,7 @@ public final class KidayChronicleScreen extends Screen {
             backButton.onPress();
             return true;
         }
-        if (keyCode == 267 && firstPage < KidayChronicleItem.PAGE_COUNT - 2) {
+        if (keyCode == 267 && firstPage < KidayChronicleItem.PAGE_COUNT - 1) {
             forwardButton.onPress();
             return true;
         }
@@ -64,17 +63,15 @@ public final class KidayChronicleScreen extends Screen {
     @Override
     public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         renderTransparentBackground(graphics);
-        int left = (width - 384) / 2;
+        int left = (width - 192) / 2;
         graphics.blit(BookViewScreen.BOOK_LOCATION, left, 2, 0, 0, 192, 192);
-        graphics.blit(BookViewScreen.BOOK_LOCATION, left + 192, 2, 0, 0, 192, 192);
     }
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         super.render(graphics, mouseX, mouseY, partialTick);
-        int left = (width - 384) / 2;
+        int left = (width - 192) / 2;
         drawPage(graphics, left, firstPage);
-        drawPage(graphics, left + 192, firstPage + 1);
     }
 
     private void drawPage(GuiGraphics graphics, int left, int page) {

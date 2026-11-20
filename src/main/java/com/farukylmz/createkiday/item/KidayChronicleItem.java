@@ -20,7 +20,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import com.farukylmz.createkiday.network.OpenChroniclePayload;
 
 public final class KidayChronicleItem extends WrittenBookItem {
-    public static final int PAGE_COUNT = 22;
+    public static final int PAGE_COUNT = 8;
     public static final List<Component> PAGES = IntStream.rangeClosed(1, PAGE_COUNT)
             .mapToObj(page -> (Component) Component.translatable("book.create_kiday.chronicle.page_" + page))
             .toList();

@@ -6,7 +6,7 @@
 
 Create: Kiday adds a new metal and its complete production chain to Create: find Kiday underground, melt it in a heated Basin, cast it with Patterns, and cool the castings with Bulk Washing. Explore new equipment, the Hunter Bracelet, the Lightning Engine, and the stormbound Lei Gong encounter.
 
-**Release:** [1.2.0](https://github.com/farukylmz0550/create-kiday/releases/tag/1.2.0) · **License:** MIT
+**Release:** [1.3.0](https://github.com/farukylmz0550/create-kiday/releases/tag/1.3.0) · **License:** MIT
 
 ## Screenshots
 
@@ -27,7 +27,7 @@ Create: Kiday adds a new metal and its complete production chain to Create: find
 - Curios 9.2.2 or later
 - JEI 19.x (optional)
 
-Install Create: Kiday and its required dependencies on both the client and server. Download the compiled `create_kiday_1.2.0.jar` from the [1.2.0 release](https://github.com/farukylmz0550/create-kiday/releases/tag/1.2.0).
+Install Create: Kiday and its required dependencies on both the client and server. Download the compiled `create_kiday_1.3.0.jar` from the [1.3.0 release](https://github.com/farukylmz0550/create-kiday/releases/tag/1.3.0).
 
 ## Getting started
 
@@ -63,8 +63,12 @@ Use Java 21 and the checked-in Gradle wrapper:
 ./gradlew runData
 ```
 
-`./gradlew build` creates `build/libs/create_kiday_1.2.0.jar` and runs the local `installFragmanMod` copy task for the Modrinth `fragman` profile. To build without installing into that local game profile, run `./gradlew build -x installFragmanMod`.
+`./gradlew build` creates `build/libs/create_kiday_1.3.0.jar` without writing to a machine-specific game profile.
 
 ## License
 
 Create: Kiday source code is available under the [MIT License](LICENSE). Minecraft, NeoForge, Create, Curios, and JEI are trademarks or property of their respective owners.
+
+# Credits
+
+The Waqwaq tree placement and ground-survival filter were implemented for Create: Kiday with reference to the world-generation approach in [Regions Unexplored](https://github.com/Apollounknowndev/RegionsUnexplored) (21.1 branch). Credit to Apollo and the Regions Unexplored contributors. No source code or assets from that repository are included.

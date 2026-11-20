@@ -1,7 +1,7 @@
 {
-  "waqwaq_fruit_chime": {
+  "waqwaq_fruit_murmur": {
     "sounds": [
-      "minecraft:block/amethyst_block/chime"
+      "create_kiday:waqwaq_fruit_murmur"
     ]
   }
 }

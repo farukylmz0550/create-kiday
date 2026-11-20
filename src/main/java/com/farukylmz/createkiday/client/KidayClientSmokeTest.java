@@ -227,11 +227,11 @@ public final class KidayClientSmokeTest {
                 return;
             }
             if (stage == 7) return;
-            if (!ModCreativeTabs.KIDAY_MINERALS.get().contains(ModItems.KIDAY_INGOT.toStack()))
-                throw new IllegalStateException("Kiday Minerals tab does not contain the cooled Kiday ingot");
+            if (!ModCreativeTabs.KIDAY.get().contains(ModItems.KIDAY_INGOT.toStack()))
+                throw new IllegalStateException("The combined Kiday tab does not contain the cooled Kiday ingot");
             for (var hot : ModItems.HOT_PRODUCTS)
-                if (!ModCreativeTabs.KIDAY_MINERALS.get().contains(hot.toStack()))
-                    throw new IllegalStateException("Kiday Minerals tab is missing hot product " + hot.getId());
+                if (!ModCreativeTabs.KIDAY.get().contains(hot.toStack()))
+                    throw new IllegalStateException("The combined Kiday tab is missing hot product " + hot.getId());
             if (!KidayJeiPlugin.allRecipesRegistered())
                 throw new IllegalStateException("JEI did not register every Casting and Pattern recipe");
 

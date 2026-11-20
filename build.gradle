@@ -92,17 +92,6 @@ dependencies {
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
 tasks.named('test', Test).configure { useJUnitPlatform() }
 
-def fragmanModsDirectory = file('/home/farukylmz/.var/app/com.modrinth.ModrinthApp/data/ModrinthApp/profiles/fragman/mods')
-def installFragmanMod = tasks.register('installFragmanMod', Copy) {
-    group = 'distribution'
-    description = 'Copies the compiled mod JAR into the Modrinth fragman profile.'
-    dependsOn tasks.named('jar')
-    mustRunAfter tasks.named('check'), tasks.named('assemble')
-    from(tasks.named('jar').flatMap { it.archiveFile })
-    into fragmanModsDirectory
-}
-tasks.named('build') { dependsOn installFragmanMod }
-
 var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
     var replaceProperties = [minecraft_version_range: minecraft_version_range, neo_version: neo_version, loader_version_range: loader_version_range, mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version]
     inputs.properties replaceProperties

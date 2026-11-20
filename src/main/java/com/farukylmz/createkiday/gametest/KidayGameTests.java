@@ -157,15 +157,9 @@ public final class KidayGameTests {
 
     @GameTest(template = "empty", timeoutTicks = 40)
     public static void dedicatedCreativeTabIsRegistered(GameTestHelper helper) {
-        ResourceLocation minerals = ResourceLocation.fromNamespaceAndPath("create_kiday", "kiday_minerals");
-        ResourceLocation wood = ResourceLocation.fromNamespaceAndPath("create_kiday", "kiday_wood");
-        ResourceLocation other = ResourceLocation.fromNamespaceAndPath("create_kiday", "kiday_other");
-        helper.assertTrue(BuiltInRegistries.CREATIVE_MODE_TAB.getKey(ModCreativeTabs.KIDAY_MINERALS.get()).equals(minerals),
-                "The Kiday Minerals creative tab is not registered");
-        helper.assertTrue(BuiltInRegistries.CREATIVE_MODE_TAB.getKey(ModCreativeTabs.KIDAY_WOOD.get()).equals(wood),
-                "The Kiday Wood creative tab is not registered");
-        helper.assertTrue(BuiltInRegistries.CREATIVE_MODE_TAB.getKey(ModCreativeTabs.KIDAY_OTHER.get()).equals(other),
-                "The Kiday Other creative tab is not registered");
+        ResourceLocation tab = ResourceLocation.fromNamespaceAndPath("create_kiday", "kiday");
+        helper.assertTrue(BuiltInRegistries.CREATIVE_MODE_TAB.getKey(ModCreativeTabs.KIDAY.get()).equals(tab),
+                "The combined Kiday creative tab is not registered");
         helper.succeed();
     }
 
@@ -670,8 +664,8 @@ public final class KidayGameTests {
     public static void stormGroveIsWideAndExclusivelySpawnsLeiGong(GameTestHelper helper) {
         var biomes = helper.getLevel().registryAccess().registryOrThrow(Registries.BIOME);
         var stormGrove = biomes.getHolderOrThrow(ModBiomes.STORM_GROVE);
-        helper.assertTrue(ModBiomes.STORM_GROVE_WIDTH >= 320 && ModBiomes.STORM_GROVE_WIDTH <= 500,
-                "Storm Grove region width is outside the intended 320–500 block range");
+        helper.assertTrue(ModBiomes.STORM_GROVE_WIDTH == 256,
+                "Storm Grove region width is not set to the intended 256 blocks");
         var treeFeatureKey = ResourceKey.create(Registries.PLACED_FEATURE,
                 ResourceLocation.fromNamespaceAndPath("create_kiday", "waqwaq_trees"));
         var treeFeature = helper.getLevel().registryAccess().registryOrThrow(Registries.PLACED_FEATURE)
@@ -765,7 +759,7 @@ public final class KidayGameTests {
     }
 
     @GameTest(template = "empty", timeoutTicks = 40)
-    public static void waqwaqSaplingGrowsABranchedTreeWithBonemeal(GameTestHelper helper) {
+    public static void waqwaqSaplingGrowsVanillaSpruceStyleTreeWithBonemeal(GameTestHelper helper) {
         BlockPos base = new BlockPos(8, 20, 8);
         for (int x = -5; x <= 5; x++) {
             for (int z = -5; z <= 5; z++) helper.setBlock(base.offset(x, 0, z), Blocks.DIRT);
@@ -779,21 +773,18 @@ public final class KidayGameTests {
                 "Waqwaq sapling cannot receive bonemeal");
         sapling.performBonemeal(helper.getLevel(), helper.getLevel().random, worldBase.above(), state);
         int logs = 0;
-        int branchLogs = 0;
+        int leaves = 0;
         for (int x = -5; x <= 5; x++) {
             for (int y = 1; y <= 16; y++) {
                 for (int z = -5; z <= 5; z++) {
                     var grown = helper.getLevel().getBlockState(worldBase.offset(x, y, z));
-                    if (grown.is(ModBlocks.WAQWAQ_LOG.get())) {
-                        logs++;
-                        if (grown.getValue(net.minecraft.world.level.block.RotatedPillarBlock.AXIS)
-                                != net.minecraft.core.Direction.Axis.Y) branchLogs++;
-                    }
+                    if (grown.is(ModBlocks.WAQWAQ_LOG.get())) logs++;
+                    if (grown.is(ModBlocks.WAQWAQ_LEAVES.get())) leaves++;
                 }
             }
         }
         helper.assertTrue(logs >= 8, "Bonemeal did not grow a full Waqwaq tree: logs=" + logs);
-        helper.assertTrue(branchLogs >= 2, "Waqwaq tree grew without visible branch logs: branches=" + branchLogs);
+        helper.assertTrue(leaves >= 10, "Bonemeal did not generate spruce-style Waqwaq foliage: leaves=" + leaves);
         helper.succeed();
     }
 
