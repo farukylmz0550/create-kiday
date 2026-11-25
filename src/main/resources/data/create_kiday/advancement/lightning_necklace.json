@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:storm_amulet"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.lightning_necklace.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.lightning_necklace.description"
+    },
+    "frame": "goal"
+  },
+  "parent": "create_kiday:encounter_storm_spirit",
+  "criteria": {
+    "necklace": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:storm_amulet"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,29 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "misc",
   "pattern": [
-    " R ",
-    "SPS",
-    "ACA"
+    "  R  ",
+    " SSS ",
+    "SPSPS",
+    " ACA "
   ],
   "key": {
-    "R": {
-      "item": "minecraft:lightning_rod"
-    },
-    "S": {
-      "item": "create_kiday:kiday_sheet"
-    },
-    "P": {
-      "item": "create:precision_mechanism"
-    },
-    "A": {
-      "item": "create:andesite_alloy"
-    },
-    "C": {
-      "item": "create:cogwheel"
-    }
+    "R": { "item": "minecraft:lightning_rod" },
+    "S": { "item": "create_kiday:kiday_sheet" },
+    "P": { "item": "create:precision_mechanism" },
+    "A": { "item": "create:andesite_alloy" },
+    "C": { "item": "create:cogwheel" }
   },
-  "result": {
-    "id": "create_kiday:lightning_engine",
-    "count": 1
-  }
+  "result": { "id": "create_kiday:lightning_engine", "count": 1 }
 }

@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'jacoco'
     id 'net.neoforged.moddev' version '2.0.148'
     id 'idea'
 }
@@ -52,7 +53,13 @@ neoForge {
         }
         gameTestServer {
             type = 'gameTestServer'
+            gameDirectory = file('run/gametest')
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        endToEndServer {
+            type = 'gameTestServer'
+            gameDirectory = file('run/e2e')
+            systemProperty 'neoforge.enabledGameTestNamespaces', "${project.mod_id}_e2e"
         }
         data {
             data()
@@ -91,6 +98,77 @@ dependencies {
 
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
 tasks.named('test', Test).configure { useJUnitPlatform() }
+
+jacoco { toolVersion = '0.8.12' }
+tasks.named('test', Test).configure { finalizedBy tasks.named('jacocoTestReport') }
+tasks.named('jacocoTestReport', JacocoReport).configure {
+    dependsOn 'test', 'unitTest', 'integrationTest', 'resourceValidationTest'
+    executionData.from(fileTree(layout.buildDirectory.dir('jacoco')) { include '*.exec' })
+    reports { xml.required = true; html.required = true }
+}
+
+tasks.register('unitTest', Test) {
+    group = 'verification'
+    description = 'Runs deterministic unit tests for pure logic and registries.'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    useJUnitPlatform()
+    include '**/KidayBalanceTest.class', '**/SalurBalanceTest.class', '**/LeiGongBalanceTest.class', '**/StormGroveBossDataTest.class'
+}
+tasks.register('validateResources', Exec) {
+    group = 'verification'
+    description = 'Validates JSON syntax, registry references, models, textures, translations, and removed IDs.'
+    commandLine 'python3', 'tools/validate_resources.py'
+}
+tasks.register('textureDeterminism', Exec) {
+    group = 'verification'
+    description = 'Verifies that checked-in pixel texture scripts produce identical PNGs on repeated runs.'
+    commandLine 'python3', 'tools/check_texture_determinism.py'
+}
+tasks.register('resourceValidationTest', Test) {
+    group = 'verification'
+    description = 'Runs packaged JSON, texture, model, translation, and resource checks.'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    useJUnitPlatform()
+    include '**/ResourceDistinctnessTest.class'
+    dependsOn tasks.named('validateResources'), tasks.named('textureDeterminism')
+}
+tasks.register('integrationTest', Test) {
+    group = 'verification'
+    description = 'Runs integration checks for registered products and resource-backed production flows.'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    useJUnitPlatform()
+    include '**/*IntegrationTest.class'
+}
+tasks.register('gameTests') {
+    group = 'verification'
+    description = 'Runs NeoForge Minecraft GameTests.'
+    dependsOn tasks.named('runGameTestServer')
+}
+tasks.register('smokeTest') {
+    group = 'verification'
+    description = 'Runs fast compilation and resource-processing checks.'
+    dependsOn tasks.named('compileJava'), tasks.named('processResources')
+}
+tasks.register('endToEndTest') {
+    group = 'verification'
+    description = 'Runs the isolated end-to-end metallurgy GameTests.'
+    dependsOn tasks.named('runEndToEndServer')
+}
+tasks.register('regressionTest') {
+    group = 'verification'
+    description = 'Runs the complete JUnit regression suite.'
+    dependsOn tasks.named('test')
+}
+tasks.register('allTests') {
+    group = 'verification'
+    description = 'Runs unit, integration, GameTest, and packaged resource validation.'
+    dependsOn tasks.named('unitTest'), tasks.named('integrationTest'), tasks.named('resourceValidationTest'),
+            tasks.named('gameTests'), tasks.named('endToEndTest'), tasks.named('textureDeterminism'),
+            tasks.named('jacocoTestReport')
+}
 
 var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
     var replaceProperties = [minecraft_version_range: minecraft_version_range, neo_version: neo_version, loader_version_range: loader_version_range, mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version]

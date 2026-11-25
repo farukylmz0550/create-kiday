@@ -1,0 +1,10 @@
+{
+  "type": "create_kiday:casting",
+  "mold": "create_kiday:helmet_mold",
+  "fluid": "create_kiday:molten_salur",
+  "amount": 720,
+  "result": "create_kiday:hot_helmet",
+  "metal_units": 5,
+  "processing_time": 100,
+  "metal": "salur"
+}

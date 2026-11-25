@@ -3,7 +3,8 @@
   "mold": "create_kiday:chestplate_mold",
   "fluid": "create_kiday:molten_kiday",
   "amount": 1152,
-  "result": "create_kiday:hot_kiday_chestplate",
+  "result": "create_kiday:hot_chestplate",
   "metal_units": 8,
-  "processing_time": 160
+  "processing_time": 160,
+  "metal": "kiday"
 }

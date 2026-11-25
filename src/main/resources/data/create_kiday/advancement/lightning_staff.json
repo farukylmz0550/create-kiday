@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:lightning_staff"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.lightning_staff.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.lightning_staff.description"
+    },
+    "frame": "goal"
+  },
+  "parent": "create_kiday:defeat_lei_gong",
+  "criteria": {
+    "complete": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["STS", "GCG", "SAS"],
+  "key": {
+    "S": { "item": "create_kiday:salur_sheet" },
+    "T": { "item": "create:shaft" },
+    "G": { "item": "minecraft:glass" },
+    "C": { "item": "create:andesite_casing" },
+    "A": { "item": "create:andesite_alloy" }
+  },
+  "result": { "id": "create_kiday:biomass_generator", "count": 1 }
+}

@@ -1,108 +1,108 @@
- {
-   "parent": "create_kiday:full_armor",
-   "display": {
-     "icon": {
-       "id": "create_kiday:kiday_pickaxe"
-     },
-     "title": {
-       "translate": "advancements.create_kiday.master_smith.title"
-     },
-     "description": {
-       "translate": "advancements.create_kiday.master_smith.description"
-     },
-     "frame": "challenge",
-     "announce_to_chat": true
-   },
-   "criteria": {
-     "sword": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_sword"
-           }
-         ]
-       }
-     },
-     "pickaxe": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_pickaxe"
-           }
-         ]
-       }
-     },
-     "axe": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_axe"
-           }
-         ]
-       }
-     },
-     "shovel": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_shovel"
-           }
-         ]
-       }
-     },
-     "hoe": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_hoe"
-           }
-         ]
-       }
-     },
-     "helmet": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_helmet"
-           }
-         ]
-       }
-     },
-     "chestplate": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_chestplate"
-           }
-         ]
-       }
-     },
-     "leggings": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_leggings"
-           }
-         ]
-       }
-     },
-     "boots": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_boots"
-           }
-         ]
-       }
-     }
-   }
- }
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:kiday_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.master_smith.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.master_smith.description"
+    },
+    "frame": "challenge",
+    "announce_to_chat": true
+  },
+  "parent": "create_kiday:all_tools",
+  "criteria": {
+    "kiday_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_sword"
+          }
+        ]
+      }
+    },
+    "kiday_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_pickaxe"
+          }
+        ]
+      }
+    },
+    "kiday_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_axe"
+          }
+        ]
+      }
+    },
+    "kiday_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_shovel"
+          }
+        ]
+      }
+    },
+    "kiday_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_hoe"
+          }
+        ]
+      }
+    },
+    "kiday_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_helmet"
+          }
+        ]
+      }
+    },
+    "kiday_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_chestplate"
+          }
+        ]
+      }
+    },
+    "kiday_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_leggings"
+          }
+        ]
+      }
+    },
+    "kiday_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_boots"
+          }
+        ]
+      }
+    }
+  }
+}

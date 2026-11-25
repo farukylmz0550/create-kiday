@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HH",
+    "HS",
+    " S"
+  ],
+  "key": {
+    "H": {
+      "item": "create_kiday:salur_axe_head"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "create_kiday:salur_axe"
+  }
+}

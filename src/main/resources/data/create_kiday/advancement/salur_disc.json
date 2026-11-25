@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:salur_disk"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.salur_disc.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.salur_disc.description"
+    },
+    "frame": "task"
+  },
+  "parent": "create_kiday:first_salur",
+  "criteria": {
+    "crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:salur_disc"
+          }
+        ]
+      }
+    }
+  }
+}

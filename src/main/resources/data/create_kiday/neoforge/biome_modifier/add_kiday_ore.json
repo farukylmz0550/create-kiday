@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#minecraft:is_overworld",
+  "biomes": "#create_kiday:kiday_ore_generation",
   "features": "create_kiday:kiday_ore",
   "step": "underground_ores"
 }

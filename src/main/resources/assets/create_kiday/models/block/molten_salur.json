@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "create_kiday:block/molten_salur_still",
+    "still": "create_kiday:block/molten_salur_still",
+    "flow": "create_kiday:block/molten_salur_flow"
+  }
+}

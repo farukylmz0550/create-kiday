@@ -3,7 +3,8 @@
   "mold": "create_kiday:sword_head_mold",
   "fluid": "create_kiday:molten_kiday",
   "amount": 288,
-  "result": "create_kiday:hot_kiday_sword_head",
+  "result": "create_kiday:hot_sword_head",
   "metal_units": 2,
-  "processing_time": 40
+  "processing_time": 40,
+  "metal": "kiday"
 }

@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:tnt_disc"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.tnt_disc.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.tnt_disc.description"
+    },
+    "frame": "task"
+  },
+  "parent": "create_kiday:salur_disc",
+  "criteria": {
+    "used": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

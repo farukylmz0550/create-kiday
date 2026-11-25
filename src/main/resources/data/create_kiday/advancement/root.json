@@ -1,22 +1,22 @@
- {
-   "display": {
-     "icon": {
-       "id": "create_kiday:raw_kiday"
-     },
-     "title": {
-       "translate": "advancements.create_kiday.root.title"
-     },
-     "description": {
-       "translate": "advancements.create_kiday.root.description"
-     },
-     "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
-     "show_toast": true,
-     "announce_to_chat": false,
-     "frame": "task"
-   },
-   "criteria": {
-     "raw_kiday": {
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:raw_kiday"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.root.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.root.description"
+    },
+    "frame": "task",
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "first_login": {
       "trigger": "minecraft:impossible"
-     }
-   }
- }
+    }
+  }
+}

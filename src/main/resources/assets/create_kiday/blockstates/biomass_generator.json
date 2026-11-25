@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "create_kiday:block/biomass_generator" },
+    "facing=east": { "model": "create_kiday:block/biomass_generator", "y": 90 },
+    "facing=south": { "model": "create_kiday:block/biomass_generator", "y": 180 },
+    "facing=west": { "model": "create_kiday:block/biomass_generator", "y": 270 }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": { "item": "create_kiday:kiday_panel" },
+  "transitional_item": { "id": "create_kiday:incomplete_storm_mechanism" },
+  "loops": 1,
+  "sequence": [
+    { "type": "create:deploying", "ingredients": [
+      { "item": "create_kiday:incomplete_storm_mechanism" },
+      { "item": "create:precision_mechanism" }
+    ], "results": [{ "id": "create_kiday:incomplete_storm_mechanism" }] },
+    { "type": "create:deploying", "ingredients": [
+      { "item": "create_kiday:incomplete_storm_mechanism" },
+      { "item": "minecraft:lightning_rod" }
+    ], "results": [{ "id": "create_kiday:incomplete_storm_mechanism" }] },
+    { "type": "create:pressing", "ingredients": [
+      { "item": "create_kiday:incomplete_storm_mechanism" }
+    ], "results": [{ "id": "create_kiday:incomplete_storm_mechanism" }] }
+  ],
+  "results": [{ "chance": 0.8, "id": "create_kiday:storm_mechanism" }]
+}

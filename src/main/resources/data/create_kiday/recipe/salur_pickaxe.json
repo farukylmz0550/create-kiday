@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HHH",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "H": {
+      "item": "create_kiday:salur_pickaxe_head"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "create_kiday:salur_pickaxe"
+  }
+}

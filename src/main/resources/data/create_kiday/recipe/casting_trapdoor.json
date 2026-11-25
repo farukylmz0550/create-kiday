@@ -3,7 +3,8 @@
   "mold": "create_kiday:trapdoor_mold",
   "fluid": "create_kiday:molten_kiday",
   "amount": 576,
-  "result": "create_kiday:hot_kiday_trapdoor",
+  "result": "create_kiday:hot_trapdoor",
   "metal_units": 4,
-  "processing_time": 80
+  "processing_time": 80,
+  "metal": "kiday"
 }

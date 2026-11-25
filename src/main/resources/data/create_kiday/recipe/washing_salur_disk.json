@@ -1,0 +1,16 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "create_kiday:hot_disk",
+      "components": {
+        "create_kiday:metal_type": "salur"
+      }
+    }
+  ],
+  "results": [
+    {
+      "id": "create_kiday:salur_disc"
+    }
+  ]
+}

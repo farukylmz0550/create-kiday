@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:lightning_staff"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.lightning_staff_kill.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.lightning_staff_kill.description"
+    },
+    "frame": "goal"
+  },
+  "parent": "create_kiday:lightning_staff",
+  "criteria": {
+    "kill": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

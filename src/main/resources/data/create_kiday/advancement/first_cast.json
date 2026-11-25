@@ -1,20 +1,20 @@
- {
-   "parent": "create_kiday:root",
-   "display": {
-     "icon": {
-       "id": "create_kiday:hot_kiday_ingot"
-     },
-     "title": {
-       "translate": "advancements.create_kiday.first_cast.title"
-     },
-     "description": {
-       "translate": "advancements.create_kiday.first_cast.description"
-     },
-     "frame": "task"
-   },
-   "criteria": {
-     "cast": {
-       "trigger": "minecraft:impossible"
-     }
-   }
- }
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:hot_ingot"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.first_cast.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.first_cast.description"
+    },
+    "frame": "task"
+  },
+  "parent": "create_kiday:first_kiday",
+  "criteria": {
+    "cast": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

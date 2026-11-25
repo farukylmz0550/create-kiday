@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "create_kiday:salur_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_kiday:salur_sheet"
+    }
+  ]
+}

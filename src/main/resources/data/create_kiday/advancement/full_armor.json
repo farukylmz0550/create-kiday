@@ -1,57 +1,57 @@
- {
-   "parent": "create_kiday:all_tools",
-   "display": {
-     "icon": {
-       "id": "create_kiday:kiday_chestplate"
-     },
-     "title": {
-       "translate": "advancements.create_kiday.full_armor.title"
-     },
-     "description": {
-       "translate": "advancements.create_kiday.full_armor.description"
-     },
-     "frame": "task"
-   },
-   "criteria": {
-     "helmet": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_helmet"
-           }
-         ]
-       }
-     },
-     "chestplate": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_chestplate"
-           }
-         ]
-       }
-     },
-     "leggings": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_leggings"
-           }
-         ]
-       }
-     },
-     "boots": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_boots"
-           }
-         ]
-       }
-     }
-   }
- }
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:kiday_chestplate"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.full_armor.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.full_armor.description"
+    },
+    "frame": "goal"
+  },
+  "parent": "create_kiday:first_cast",
+  "criteria": {
+    "kiday_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_helmet"
+          }
+        ]
+      }
+    },
+    "kiday_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_chestplate"
+          }
+        ]
+      }
+    },
+    "kiday_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_leggings"
+          }
+        ]
+      }
+    },
+    "kiday_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_boots"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HHH",
+    "H H",
+    "H H"
+  ],
+  "key": {
+    "H": {
+      "item": "create_kiday:salur_ingot"
+    }
+  },
+  "result": {
+    "id": "create_kiday:salur_leggings"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "create_kiday:casting",
+  "mold": "create_kiday:boots_mold",
+  "fluid": "create_kiday:molten_salur",
+  "amount": 576,
+  "result": "create_kiday:hot_boots",
+  "metal_units": 4,
+  "processing_time": 80,
+  "metal": "salur"
+}

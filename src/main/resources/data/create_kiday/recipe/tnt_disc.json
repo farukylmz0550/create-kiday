@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " T ",
+    "TDT",
+    " T "
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:tnt"
+    },
+    "D": {
+      "item": "create_kiday:salur_disc"
+    }
+  },
+  "result": {
+    "id": "create_kiday:tnt_disc"
+  }
+}

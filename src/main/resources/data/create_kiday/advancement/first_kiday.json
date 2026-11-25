@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:raw_kiday"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.first_kiday.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.first_kiday.description"
+    },
+    "frame": "task"
+  },
+  "parent": "create_kiday:root",
+  "criteria": {
+    "drop": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

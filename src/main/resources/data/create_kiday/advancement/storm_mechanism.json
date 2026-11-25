@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:storm_mechanism"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.storm_mechanism.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.storm_mechanism.description"
+    },
+    "frame": "task"
+  },
+  "parent": "create_kiday:first_cast",
+  "criteria": {
+    "crafted": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:storm_mechanism"
+          }
+        ]
+      }
+    }
+  }
+}

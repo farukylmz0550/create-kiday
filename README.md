@@ -4,9 +4,9 @@
   <p>A Create-powered metallurgy and adventure addon for Minecraft 1.21.1.</p>
 </div>
 
-Create: Kiday adds a new metal and its complete production chain to Create: find Kiday underground, melt it in a heated Basin, cast it with Patterns, and cool the castings with Bulk Washing. Explore new equipment, the Hunter Bracelet, the Lightning Engine, and the stormbound Lei Gong encounter.
+Create: Kiday adds Kiday and Salur metallurgy to Create, including shared casting molds, heated castings, and new equipment. Explore the Lightning Engine, LeiGong's Replica, and Storm Spirits in the Storm Grove.
 
-**Release:** [1.3.0](https://github.com/farukylmz0550/create-kiday/releases/tag/1.3.0) · **License:** MIT
+**Version:** 1.4.0 · **License:** MIT.
 
 ## Screenshots
 
@@ -27,25 +27,29 @@ Create: Kiday adds a new metal and its complete production chain to Create: find
 - Curios 9.2.2 or later
 - JEI 19.x (optional)
 
-Install Create: Kiday and its required dependencies on both the client and server. Download the compiled `create_kiday_1.3.0.jar` from the [1.3.0 release](https://github.com/farukylmz0550/create-kiday/releases/tag/1.3.0).
+Install Create: Kiday 1.4.0 and its required dependencies on both the client and server.
 
 ## Getting started
 
-1. Mine Kiday Ore in underground Overworld biomes. Veins generate between Y -48 and Y 48.
-2. Process Raw Kiday in a Basin with a Mechanical Mixer at 32 RPM or faster and a normally heated Blaze Burner. Superheating is not needed. Each Raw Kiday yields 144 mB of Molten Kiday.
-3. Move Molten Kiday through Create pipes or use its bucket. The placed fluid is luminous and damages entities, like lava.
-4. Shape a Blank Pattern with a Deployer, then place the Pattern on a Casting Table. The table accepts exactly the fluid amount required by that Pattern; without a Pattern it accepts no fluid.
-5. Remove the hot casting and cool it with Bulk Washing. Point a fan through water toward the item; suction and reverse airflow do not cool castings.
+1. Find Kiday in the Overworld and Salur between Y=0 and Y=64. Salur generates throughout the Overworld, including beneath Storm Grove.
+2. Process Raw Kiday or Raw Salur in a heated Create Basin. Each ingot uses 144 mB of its matching molten metal.
+3. Shape a Blank Pattern with a Deployer, then use it on the shared Casting Table. Kiday and Salur use the same mold shapes; the metal is recorded on each hot casting.
+4. Cool hot castings with Bulk Washing. Use the appropriate metal's cooled piece to craft equipment.
+5. Craft a Disk Mold to cast a returning Salur Disc. Combine it with TNT for a TNT Disc. LeiGong's Core and Salur Sheets craft the Lightning Staff Head.
 
 The Casting Table recipe uses three Iron Sheets across the top row, two Create Fluid Pipes around a Create Basin in the middle row, and three Andesite Alloys along the bottom row.
 
 ## Features
 
-- **Kiday metallurgy:** underground ore, ingots, sheets, placeable molten fluid, twelve reusable Patterns, exact-volume casting, and individually textured hot castings.
-- **Tools and armor:** a full Kiday tool set and armor set, with situational abilities and distinct in-game textures.
-- **Hunter Bracelet:** launches a returning disk four blocks forward, targets hostiles within 16 blocks, and chains through up to five targets in one flight.
-- **Lightning Engine:** redirects lightning in its loaded chunk to its custom rod, then generates Create rotation for a limited charge. Set output from 1 to 64 RPM with the Create value box on its back; power exits through the horizontal shaft on the front.
-- **Storm Grove:** discover a stormbound biome and face Lei Gong's Avatar.
+- **Kiday and Salur metallurgy:** ores, ingots, sheets, placeable molten fluids, shared molds, exact-volume casting, and cooled hot castings with a separate metal data component.
+- **Tools and armor:** Kiday and Salur equipment, with Kiday abilities and a Salur armor movement bonus.
+- **Discs:** a returning, piercing Salur Disc and a TNT Disc. Creative throws do not consume disc durability or stacks.
+- **Biomass Generator:** burns tagged biomass fuels to generate Create rotation from 8 to 64 RPM, with automatic item input and output.
+- **Lightning Staff:** LeiGong-style lightning on left click and a 6 HP melee strike on right click, with a three-second cooldown and Kiday tool durability.
+- **Lightning Engine:** redirects lightning in its loaded chunk to its custom rod, then generates Create rotation for a limited charge. Select 16, 32, 64, or 128 RPM with the Create value box on its back; power exits through the horizontal shaft on the front.
+- **Storm Grove:** LeiGong's Replica uses three health phases and a persistent, region-based boss spawn record. Neutral Storm Spirits spawn in the grove, use Minecraft's Blaze model and animation, and have a LeiGong-palette texture and spawn egg.
+- **Advancements:** 21 advancements, with 20 visible progression milestones and one hidden completion achievement.
+- **Removed in 1.4.0:** Hunter Bracelet, its components and mold, and its automatic targeting system. Worlds and items from earlier releases are not backward compatible.
 - **Kiday Chronicle:** read the story behind the metal and its smith.
 - **Create integration:** Ponder scenes and JEI recipe displays explain the production and machine workflows.
 
@@ -53,21 +57,32 @@ The Casting Table recipe uses three Iron Sheets across the top row, two Create F
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, texture conventions, and contribution checks.
 
-Use Java 21 and the checked-in Gradle wrapper:
+Use Java 21, Python 3, and Pillow 12.3.0 for deterministic pixel-art generation and texture checks. The checked-in Gradle wrapper provides separate commands for each test group:
 
 ```bash
 ./gradlew build
 ./gradlew test
+./gradlew unitTest
+./gradlew integrationTest
+./gradlew gameTests
+./gradlew endToEndTest
+./gradlew smokeTest
+./gradlew regressionTest
+./gradlew resourceValidationTest
+./gradlew textureDeterminism
+./gradlew jacocoTestReport
+./gradlew allTests
 ./gradlew runGameTestServer
 ./gradlew runClient -PkidayClientSmokeTest
-./gradlew runData
 ```
 
-`./gradlew build` creates `build/libs/create_kiday_1.3.0.jar` without writing to a machine-specific game profile.
+`./gradlew build` creates `build/libs/create_kiday_1.4.0.jar`. `gameTests` runs the 30 headless gameplay tests; `endToEndTest` runs a separate Salur ore-registration, melting, and shared-casting path. The opt-in client smoke test (`./gradlew runClient -PkidayClientSmokeTest`) requires a graphical session and checks resource/model loading plus rendered screens, entity fronts, and the Biomass Generator model and Ponder scene. `resourceValidationTest` validates JSON, item and block references, models, textures, translations, and removed IDs. `textureDeterminism` regenerates all scripted pixel textures twice and compares PNG hashes. Coverage reports are written under `build/reports/jacoco/`; Minecraft integration coverage is complemented by GameTests because most game-bound code is not measurable in the JVM-only JaCoCo tasks.
+
+LeiGong spawn checks begin when one of the two in-patch anchor chunks loads. The server flood-fills the bounded 32×32 chunk footprint using biome-source lookups, counts only the connected Storm Grove component, and verifies the anchor belongs to that component. This does not load or generate chunks. The resulting count selects one boss below 256 chunks and two at or above 256; spawn markers remain saved per world and region. Storm Spirit uses Minecraft's Blaze model and animation with a hand-drawn 64×32 LeiGong-palette texture: mapped Blaze UVs are opaque and unused UVs are transparent. The texture is generated by `tools/generate_salur_textures.py`.
 
 ## License
 
-Create: Kiday source code is available under the [MIT License](LICENSE). Minecraft, NeoForge, Create, Curios, and JEI are trademarks or property of their respective owners.
+Create: Kiday source code and original resources are available under the [MIT License](LICENSE). The project uses external APIs and mods with their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for versions and license links. Third-party source code and artwork are not included in this repository. Minecraft, NeoForge, Create, Curios, and JEI are trademarks or property of their respective owners.
 
 # Credits
 

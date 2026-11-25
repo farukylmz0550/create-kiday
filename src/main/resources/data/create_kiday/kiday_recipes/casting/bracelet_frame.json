@@ -1,9 +1,0 @@
-{
-  "type": "create_kiday:casting",
-  "mold": "create_kiday:bracelet_frame_mold",
-  "fluid": "create_kiday:molten_kiday",
-  "amount": 288,
-  "result": "create_kiday:hot_bracelet_frame",
-  "metal_units": 2,
-  "processing_time": 40
-}

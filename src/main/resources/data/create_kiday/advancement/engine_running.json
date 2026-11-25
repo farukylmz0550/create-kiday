@@ -1,20 +1,20 @@
- {
-   "parent": "create_kiday:root",
-   "display": {
-     "icon": {
-       "id": "create_kiday:lightning_engine"
-     },
-     "title": {
-       "translate": "advancements.create_kiday.engine_running.title"
-     },
-     "description": {
-       "translate": "advancements.create_kiday.engine_running.description"
-     },
-     "frame": "task"
-   },
-   "criteria": {
-     "running": {
-       "trigger": "minecraft:impossible"
-     }
-   }
- }
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:lightning_engine"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.engine_running.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.engine_running.description"
+    },
+    "frame": "task"
+  },
+  "parent": "create_kiday:storm_mechanism",
+  "criteria": {
+    "running": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

@@ -1,67 +1,67 @@
- {
-   "parent": "create_kiday:first_cast",
-   "display": {
-     "icon": {
-       "id": "create_kiday:kiday_pickaxe"
-     },
-     "title": {
-       "translate": "advancements.create_kiday.all_tools.title"
-     },
-     "description": {
-       "translate": "advancements.create_kiday.all_tools.description"
-     },
-     "frame": "task"
-   },
-   "criteria": {
-     "sword": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_sword"
-           }
-         ]
-       }
-     },
-     "pickaxe": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_pickaxe"
-           }
-         ]
-       }
-     },
-     "axe": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_axe"
-           }
-         ]
-       }
-     },
-     "shovel": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_shovel"
-           }
-         ]
-       }
-     },
-     "hoe": {
-       "trigger": "minecraft:inventory_changed",
-       "conditions": {
-         "items": [
-           {
-             "items": "create_kiday:kiday_hoe"
-           }
-         ]
-       }
-     }
-   }
- }
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:kiday_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.all_tools.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.all_tools.description"
+    },
+    "frame": "goal"
+  },
+  "parent": "create_kiday:first_cast",
+  "criteria": {
+    "kiday_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_sword"
+          }
+        ]
+      }
+    },
+    "kiday_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_pickaxe"
+          }
+        ]
+      }
+    },
+    "kiday_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_axe"
+          }
+        ]
+      }
+    },
+    "kiday_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_shovel"
+          }
+        ]
+      }
+    },
+    "kiday_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:kiday_hoe"
+          }
+        ]
+      }
+    }
+  }
+}

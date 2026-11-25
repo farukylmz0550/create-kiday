@@ -7,8 +7,8 @@ modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
 logoFile="logo.png"
-authors="Faruk Yılmaz"
-description='''Create-powered metallurgy, Kiday equipment, the Hunter Bracelet, and the Lightning Engine.'''
+authors="Create: Kiday contributors"
+description='''Create-powered metallurgy, Salur equipment, biomass power, and Storm Grove exploration.'''
 
 [[mixins]]
 config="create_kiday.mixins.json"

@@ -1,0 +1,16 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "create_kiday:hot_sword_head",
+      "components": {
+        "create_kiday:metal_type": "kiday"
+      }
+    }
+  ],
+  "results": [
+    {
+      "id": "create_kiday:kiday_sword_head"
+    }
+  ]
+}

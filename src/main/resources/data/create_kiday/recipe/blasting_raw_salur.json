@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "create_kiday:raw_salur"
+  },
+  "result": {
+    "id": "create_kiday:salur_ingot"
+  },
+  "experience": 0.7,
+  "cookingtime": 100
+}

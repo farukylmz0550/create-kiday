@@ -1,14 +1,16 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.farukylmz.createkiday.mixin",
+  "package": "io.github.createkiday.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "BiomeSourceMixin",
     "MultiNoiseBiomeSourceMixin",
     "PlayerStunMixin",
     "StormGroveFarmlandMixin",
-    "StormGroveHoeMixin"
+    "StormGroveHoeMixin",
+    "StormGroveZombieSunMixin",
+    "SplashingMetalFilterMixin"
   ],
   "injectors": {
     "defaultRequire": 1

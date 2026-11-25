@@ -1,0 +1,67 @@
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:salur_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.salur_all_tools.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.salur_all_tools.description"
+    },
+    "frame": "goal"
+  },
+  "parent": "create_kiday:first_salur",
+  "criteria": {
+    "salur_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:salur_sword"
+          }
+        ]
+      }
+    },
+    "salur_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:salur_pickaxe"
+          }
+        ]
+      }
+    },
+    "salur_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:salur_axe"
+          }
+        ]
+      }
+    },
+    "salur_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:salur_shovel"
+          }
+        ]
+      }
+    },
+    "salur_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:salur_hoe"
+          }
+        ]
+      }
+    }
+  }
+}

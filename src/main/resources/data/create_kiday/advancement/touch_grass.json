@@ -1,22 +1,22 @@
- {
-   "parent": "create_kiday:all_casts",
-   "display": {
-     "icon": {
-       "id": "create_kiday:kiday_chronicle"
-     },
-     "title": {
-       "translate": "advancements.create_kiday.touch_grass.title"
-     },
-     "description": {
-       "translate": "advancements.create_kiday.touch_grass.description"
-     },
-     "frame": "challenge",
-     "announce_to_chat": true,
-     "hidden": true
-   },
-   "criteria": {
-     "all_eight": {
-       "trigger": "minecraft:impossible"
-     }
-   }
- }
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:kiday_chronicle"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.touch_grass.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.touch_grass.description"
+    },
+    "frame": "challenge",
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "create_kiday:root",
+  "criteria": {
+    "all_eighteen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

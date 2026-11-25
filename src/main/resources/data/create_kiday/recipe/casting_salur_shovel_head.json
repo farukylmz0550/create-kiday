@@ -1,0 +1,10 @@
+{
+  "type": "create_kiday:casting",
+  "mold": "create_kiday:shovel_head_mold",
+  "fluid": "create_kiday:molten_salur",
+  "amount": 144,
+  "result": "create_kiday:hot_shovel_head",
+  "metal_units": 1,
+  "processing_time": 20,
+  "metal": "salur"
+}

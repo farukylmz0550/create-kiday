@@ -129,10 +129,10 @@
     "misc": [],
     "monster": [
       {
-        "type": "create_kiday:lei_gong",
-        "weight": 400,
+        "type": "create_kiday:storm_spirit",
+        "weight": 100,
         "minCount": 1,
-        "maxCount": 1
+        "maxCount": 3
       },
       {
         "type": "minecraft:spider",

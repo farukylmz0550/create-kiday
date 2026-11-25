@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:lush_caves",
+    "minecraft:dripstone_caves",
+    "create_kiday:storm_grove"
+  ]
+}

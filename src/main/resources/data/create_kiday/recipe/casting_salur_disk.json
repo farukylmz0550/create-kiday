@@ -1,0 +1,10 @@
+{
+  "type": "create_kiday:casting",
+  "mold": "create_kiday:disk_mold",
+  "fluid": "create_kiday:molten_salur",
+  "amount": 432,
+  "result": "create_kiday:hot_disk",
+  "metal": "salur",
+  "metal_units": 3,
+  "processing_time": 60
+}

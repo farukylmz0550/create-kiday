@@ -1,53 +1,53 @@
- {
-   "parent": "create_kiday:first_cast",
-   "display": {
-     "icon": {
-       "id": "create_kiday:bracelet_frame_mold"
-     },
-     "title": {
-       "translate": "advancements.create_kiday.all_casts.title"
-     },
-     "description": {
-       "translate": "advancements.create_kiday.all_casts.description"
-     },
-     "frame": "goal"
-   },
-   "criteria": {
-     "cast_ingot": {
-       "trigger": "minecraft:impossible"
-     },
-     "cast_sword_head": {
-       "trigger": "minecraft:impossible"
-     },
-     "cast_pickaxe_head": {
-       "trigger": "minecraft:impossible"
-     },
-     "cast_axe_head": {
-       "trigger": "minecraft:impossible"
-     },
-     "cast_shovel_head": {
-       "trigger": "minecraft:impossible"
-     },
-     "cast_hoe_head": {
-       "trigger": "minecraft:impossible"
-     },
-     "cast_helmet": {
-       "trigger": "minecraft:impossible"
-     },
-     "cast_chestplate": {
-       "trigger": "minecraft:impossible"
-     },
-     "cast_leggings": {
-       "trigger": "minecraft:impossible"
-     },
-     "cast_boots": {
-       "trigger": "minecraft:impossible"
-     },
-     "cast_trapdoor": {
-       "trigger": "minecraft:impossible"
-     },
-     "cast_bracelet_frame": {
-       "trigger": "minecraft:impossible"
-     }
-   }
- }
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:salur_disk_mold"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.all_casts.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.all_casts.description"
+    },
+    "frame": "goal"
+  },
+  "parent": "create_kiday:first_cast",
+  "criteria": {
+    "cast_ingot": {
+      "trigger": "minecraft:impossible"
+    },
+    "cast_sword_head": {
+      "trigger": "minecraft:impossible"
+    },
+    "cast_pickaxe_head": {
+      "trigger": "minecraft:impossible"
+    },
+    "cast_axe_head": {
+      "trigger": "minecraft:impossible"
+    },
+    "cast_shovel_head": {
+      "trigger": "minecraft:impossible"
+    },
+    "cast_hoe_head": {
+      "trigger": "minecraft:impossible"
+    },
+    "cast_helmet": {
+      "trigger": "minecraft:impossible"
+    },
+    "cast_chestplate": {
+      "trigger": "minecraft:impossible"
+    },
+    "cast_leggings": {
+      "trigger": "minecraft:impossible"
+    },
+    "cast_boots": {
+      "trigger": "minecraft:impossible"
+    },
+    "cast_trapdoor": {
+      "trigger": "minecraft:impossible"
+    },
+    "cast_disk": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "mold": "create_kiday:axe_head_mold",
   "fluid": "create_kiday:molten_kiday",
   "amount": 432,
-  "result": "create_kiday:hot_kiday_axe_head",
+  "result": "create_kiday:hot_axe_head",
   "metal_units": 3,
   "processing_time": 60
 }

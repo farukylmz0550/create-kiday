@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:storm_amulet"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.encounter_storm_spirit.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.encounter_storm_spirit.description"
+    },
+    "frame": "task"
+  },
+  "parent": "create_kiday:root",
+  "criteria": {
+    "meet": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

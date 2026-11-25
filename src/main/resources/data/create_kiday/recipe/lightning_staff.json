@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    " K ",
+    " K "
+  ],
+  "key": {
+    "A": { "item": "create_kiday:lightning_staff_head" },
+    "K": { "item": "create_kiday:kiday_sheet" }
+  },
+  "result": {
+    "id": "create_kiday:lightning_staff"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "id": "create_kiday:raw_salur"
+    },
+    "title": {
+      "translate": "advancements.create_kiday.first_salur.title"
+    },
+    "description": {
+      "translate": "advancements.create_kiday.first_salur.description"
+    },
+    "frame": "task"
+  },
+  "parent": "create_kiday:root",
+  "criteria": {
+    "raw_salur": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_kiday:raw_salur"
+          }
+        ]
+      }
+    }
+  }
+}

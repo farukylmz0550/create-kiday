@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "III",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "create_kiday:salur_ingot"
+    }
+  },
+  "result": {
+    "id": "create_kiday:salur_block"
+  }
+}

@@ -1,9 +1,0 @@
-{
-  "type": "create_kiday:mold_shaping",
-  "sample": {
-    "item": "minecraft:ender_pearl"
-  },
-  "blank_mold": "create_kiday:blank_mold",
-  "result": "create_kiday:bracelet_frame_mold",
-  "consume_sample": true
-}
